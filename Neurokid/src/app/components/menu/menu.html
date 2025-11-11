@@ -1,0 +1,17 @@
+<div class="container">
+  <mat-toolbar class="custom-toolbar">
+    <button 
+    matButton 
+    class="btn-rojo" 
+    aria-label="Example icon-button with menu icon"
+    [matMenuTriggerFor]="menuSoftware">
+      <mat-icon>menu</mat-icon> Neurokid
+    </button>
+  </mat-toolbar>
+
+  <mat-menu #menuSoftware="matMenu">
+  <button mat-menu-item routerLink="/usuarios">Listar</button>
+  <button mat-menu-item routerLink="/usuarios/news">Registrar</button>
+</mat-menu>
+</div>
+

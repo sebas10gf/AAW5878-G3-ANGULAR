@@ -1,0 +1,36 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%"><h2>Registro de Cuestionarios</h2></div>
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+      @if(edicion){
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" />
+      </mat-form-field>
+      }
+      <br />
+      <mat-form-field>
+        <mat-label>Titulo de cuestionario</mat-label>
+        <input matInput formControlName="titulo" />
+
+        <mat-error>
+          @if (form.get('titulo')?.hasError('required')) { El campo es obligatorio!!!! }
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>version</mat-label>
+        <input matInput formControlName="version" />
+        <mat-error>
+          @if (form.get('version')?.hasError('required')) { La versión es obligatoria!!!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+       <div>
+        <button matButton="elevated">Registrar</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,1 +1,82 @@
-<p>usuariosinsert works!</p>
+<div class="container">
+  <div style="text-align: center; margin: 5%"><h2>Registro de Usuario</h2></div>
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()">
+      @if(edicion){
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" />
+      </mat-form-field>
+      }
+      <br />
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" />
+
+        <mat-error>
+          @if (form.get('nombre')?.hasError('required')) { El campo es obligatorio!!!! }
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>email</mat-label>
+        <input matInput formControlName="email" />
+        <mat-error>
+          @if (form.get('email')?.hasError('required')) { La versión es obligatoria!!!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>passwordhash</mat-label>
+       <input matInput formControlName="passwordhash" />
+        <mat-error>
+          @if (form.get('passwordhash')?.hasError('required')) { El campo es obligatorio!!!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+      
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="creado" formControlName="creado" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="creado"></mat-datepicker-toggle>
+        <mat-datepicker #creado></mat-datepicker>
+        <mat-error>
+          @if (form.get('creado')?.hasError('required')) { La fecha es obligatoria!!!! }
+        </mat-error>
+        <mat-error>
+          @if (error1) { La fecha no es valida!!!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+       <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="actualizado" formControlName="actualizado" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="actualizado"></mat-datepicker-toggle>
+        <mat-datepicker #actualizado></mat-datepicker>
+        <mat-error>
+          @if (form.get('actualizado')?.hasError('required')) { La fecha es obligatoria!!!! }
+        </mat-error>
+        <mat-error>
+          @if (error2) { La fecha no es valida!!!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <div>
+        <mat-radio-group aria-label="Select an option" formControlName="estado">
+          <mat-radio-button [value]="true">Activo</mat-radio-button>
+          <mat-radio-button [value]="false">Inactivo</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <br />
+      <div>
+        <button matButton="elevated">Basic</button>
+      </div>
+    </form>
+  </div>
+</div>

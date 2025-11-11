@@ -4,14 +4,14 @@
     matButton 
     class="btn-rojo" 
     aria-label="Example icon-button with menu icon"
-    [matMenuTriggerFor]="menuSoftware">
+    [matMenuTriggerFor]="menuUsers">
       <mat-icon>menu</mat-icon> Neurokid
     </button>
   </mat-toolbar>
 
-  <mat-menu #menuSoftware="matMenu">
-  <button mat-menu-item routerLink="/usuarios">Listar</button>
-  <button mat-menu-item routerLink="/usuarios/news">Registrar</button>
+  <mat-menu #menuUsers="matMenu">
+  <button mat-menu-item routerLink="/Users">Listar</button>
+  <button mat-menu-item routerLink="/Users/news">Registrar</button>
 </mat-menu>
 </div>
 

@@ -23,30 +23,21 @@
         <td mat-cell *matCellDef="let element">{{ element.email }}</td>
       </ng-container>
 
-      <!-- Symbol Column -->
       <ng-container matColumnDef="c4">
-        <th mat-header-cell *matHeaderCellDef>password</th>
-        <td mat-cell *matCellDef="let element">*****</td>
-      </ng-container>
-
-       <!-- Symbol Column -->
-      <ng-container matColumnDef="c5">
-        <th mat-header-cell *matHeaderCellDef>createdAt</th>
-        <td mat-cell *matCellDef="let element">{{ element.createdAt }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="c6">
         <th mat-header-cell *matHeaderCellDef>updatedAt</th>
         <td mat-cell *matCellDef="let element">{{ element.updatedAt }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="c7">
+      <ng-container matColumnDef="c5">
         <th mat-header-cell *matHeaderCellDef>enabled</th>
-        <td mat-cell *matCellDef="let element">{{ element.enabled }}</td>
+        <td mat-cell *matCellDef="let element">
+          @if(element.enabled) {Activo}
+          @else {Inactivo}
+        </td>
       </ng-container>
 
       <!-- Symbol Column -->
-      <ng-container matColumnDef="c8">
+      <ng-container matColumnDef="c6">
         <th mat-header-cell *matHeaderCellDef>Actualizar</th>
         <td mat-cell *matCellDef="let element">
               <button 
@@ -54,12 +45,12 @@
               [routerLink]="['edits',element.userId]"
               >
                 <mat-icon>edit</mat-icon>
-                Actualizar
+                
               </button>
         </td>
       </ng-container>
        <!-- Symbol Column -->
-      <ng-container matColumnDef="c9">
+      <ng-container matColumnDef="c7">
         <th mat-header-cell *matHeaderCellDef>Eliminar</th>
         <td mat-cell *matCellDef="let element">
               <button 
@@ -67,7 +58,20 @@
               (click)="eliminar(element.userId)"
               >
                 <mat-icon>delete</mat-icon>
-                Eliminar
+              
+              </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="c8">
+        <th mat-header-cell *matHeaderCellDef>Perfil</th>
+        <td mat-cell *matCellDef="let element">
+              <button 
+              matButton
+              [routerLink]="['usuario',element.userId]"
+              >
+                <mat-icon>person</mat-icon>
+                
               </button>
         </td>
       </ng-container>

@@ -8,6 +8,8 @@ import { Roles } from './components/roles/roles';
 import { Roleslinsert } from './components/roles/roleslinsert/roleslinsert';
 import { Goals } from './components/goals/goals';
 import { Goalinsert } from './components/goals/goalinsert/goalinsert';
+import { Symptomslogs } from './components/symptomslogs/symptomslogs';
+import { Symptomsloginsert } from './components/symptomslogs/symptomsloginsert/symptomsloginsert';
 
 export const routes: Routes = [
     {path:'Users', component:Usuarios,
@@ -37,5 +39,13 @@ export const routes: Routes = [
             {path:'news',component:Goalinsert},
             {path:'edits/:id',component:Goalinsert}
         ]
+    },
+
+     {path:'SymptomsLog', component:Symptomslogs,
+        children:[
+            {path:'news',component:Symptomsloginsert},
+            {path:'edits/:id',component:Symptomsloginsert}
+        ]
     }
+    
 ];

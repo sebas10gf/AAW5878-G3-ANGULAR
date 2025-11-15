@@ -1,0 +1,73 @@
+<div class="container">
+  <div style="text-align: center; margin: 3%">
+    <h2>{{ edicion ? 'Editar Sintoma' : 'Registrar Sintoma' }}</h2>
+  </div>
+  <div style="text-align: center; ">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+      @if (edicion) {
+      <mat-form-field>
+        <mat-label>Código</mat-label>
+        <input matInput formControlName="id" required />
+
+        @if (form.get('id')?.hasError('required')) {
+        <mat-error>El campo id es obligatorio.</mat-error>
+        }
+      </mat-form-field>
+      }
+      <br />
+
+      <div>
+        <mat-form-field class="example-full-width">
+          <mat-label>usuario:</mat-label>
+          <mat-select formControlName="usuario" required>
+            @for (p of listaUsers; track p.roleId) {
+            <mat-option [value]="p.roleId">
+              {{ p.user.username }}
+            </mat-option>
+            }
+          </mat-select>
+
+          @if (form.get('usuario')?.hasError('required')) {
+          <mat-error>El campo usuario es obligatorio.</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <mat-form-field>
+        <mat-label>estado</mat-label>
+        <input matInput formControlName="animo" required />
+
+        @if (form.get('animo')?.hasError('required')) {
+        <mat-error>El campo animo es obligatorio.</mat-error>
+        }
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>descripcion</mat-label>
+        <input matInput formControlName="descripcion" required />
+
+        @if (form.get('descripcion')?.hasError('required')) {
+        <mat-error>El campo descripcion es obligatorio.</mat-error>
+        }
+      </mat-form-field>
+      <br />
+
+       <mat-form-field>
+        <mat-label>fecha de registro</mat-label>
+        <input matInput [matDatepicker]="fecha" formControlName="fecha" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="fecha"></mat-datepicker-toggle>
+        <mat-datepicker #fecha></mat-datepicker>
+        <mat-error>
+          @if (form.get('fecha')?.hasError('required')) { La fecha es obligatoria!!!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+       
+      <button matButton="elevated">{{ edicion ? 'Editar' : 'Registrar' }}</button>
+    </form>
+  </div>
+</div>
+

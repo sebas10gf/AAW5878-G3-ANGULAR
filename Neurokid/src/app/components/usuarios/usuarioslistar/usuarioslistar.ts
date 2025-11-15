@@ -5,10 +5,11 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
 import { User } from '../../../models/User';
 import { Userservice } from '../../../services/userservice';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-usuarioslistar',
-  imports: [MatTableModule, MatButtonModule, MatIconModule, RouterLink],
+  imports: [MatTableModule,CommonModule,MatButtonModule, MatIconModule, RouterLink],
   templateUrl: './usuarioslistar.html',
   styleUrl: './usuarioslistar.css',
 })

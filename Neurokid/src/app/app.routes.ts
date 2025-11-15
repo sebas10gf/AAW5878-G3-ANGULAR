@@ -4,6 +4,10 @@ import { Usuariosinsert } from './components/usuarios/usuariosinsert/usuariosins
 import { CuestionariosInsert } from './components/cuestionarios/cuestionarios-insert/cuestionarios-insert';
 import { Cuestionarios } from './components/cuestionarios/cuestionarios';
 import { Perfil } from './components/usuarios/perfil/perfil';
+import { Roles } from './components/roles/roles';
+import { Roleslinsert } from './components/roles/roleslinsert/roleslinsert';
+import { Goals } from './components/goals/goals';
+import { Goalinsert } from './components/goals/goalinsert/goalinsert';
 
 export const routes: Routes = [
     {path:'Users', component:Usuarios,
@@ -18,6 +22,20 @@ export const routes: Routes = [
         children:[
             {path:'news',component:CuestionariosInsert},
             {path:'edits/:id',component:CuestionariosInsert}
+        ]
+    },
+
+     {path:'Roles', component:Roles,
+        children:[
+            {path:'news',component:Roleslinsert},
+            {path:'edits/:id',component:Roleslinsert}
+        ]
+    },
+
+    {path:'Goal', component:Goals,
+        children:[
+            {path:'news',component:Goalinsert},
+            {path:'edits/:id',component:Goalinsert}
         ]
     }
 ];

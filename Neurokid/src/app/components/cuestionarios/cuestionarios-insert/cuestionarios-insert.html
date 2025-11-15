@@ -1,5 +1,5 @@
 <div class="container">
-  <div style="text-align: center; margin: 5%"><h2>Registro de Cuestionarios</h2></div>
+  <div style="text-align: center; margin: 5%"><h2>{{ edicion ? 'Editar Cuestionario' : 'Registrar Cuestionario' }}</h2></div>
   <div style="text-align: center; margin: 5%">
     <form [formGroup]="form" (submit)="aceptar()">
       @if(edicion){

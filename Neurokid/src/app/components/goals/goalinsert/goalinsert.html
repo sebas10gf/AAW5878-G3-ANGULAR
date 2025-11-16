@@ -1,0 +1,87 @@
+<div class="container">
+  <div style="text-align: center; margin: 3%">
+    <h2>{{ edicion ? 'Editar Goal' : 'Registrar Goal' }}</h2>
+  </div>
+  <div style="text-align: center; ">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+      @if (edicion) {
+      <mat-form-field>
+        <mat-label>Código</mat-label>
+        <input matInput formControlName="id" required />
+
+        @if (form.get('id')?.hasError('required')) {
+        <mat-error>El campo id es obligatorio.</mat-error>
+        }
+      </mat-form-field>
+      }
+      <br />
+
+      <div>
+        <mat-form-field class="example-full-width">
+          <mat-label>usuario:</mat-label>
+          <mat-select formControlName="usuario" required>
+            @for (p of listaUsers; track p.roleId) {
+            <mat-option [value]="p.roleId">
+              {{ p.user.username }}
+            </mat-option>
+            }
+          </mat-select>
+
+          @if (form.get('usuario')?.hasError('required')) {
+          <mat-error>El campo tipo es obligatorio.</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <mat-form-field>
+        <mat-label>descripcion</mat-label>
+        <input matInput formControlName="descripcion" required />
+
+        @if (form.get('descripcion')?.hasError('required')) {
+        <mat-error>El campo nombre es obligatorio.</mat-error>
+        }
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>fecha de inicio</mat-label>
+        <input matInput [matDatepicker]="inicio" formControlName="inicio" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="inicio"></mat-datepicker-toggle>
+        <mat-datepicker #inicio></mat-datepicker>
+        <mat-error>
+          @if (form.get('inicio')?.hasError('required')) { La fecha es obligatoria!!!! }
+          @if (form.get('inicio')?.hasError('fechaMayorQueHoy')) { La fecha no es valida!!!! }
+
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+       <mat-form-field>
+        <mat-label>fecha de cumplimiento</mat-label>
+        <input matInput [matDatepicker]="fin" formControlName="fin" [min]="minActualizado"/>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="fin"></mat-datepicker-toggle>
+        <mat-datepicker #fin></mat-datepicker>
+        <mat-error>
+          @if (form.get('fin')?.hasError('required')) { La fecha es obligatoria!!!! }
+          @if (form.get('fin')?.hasError('min')) { La fecha no es valida!!!! }
+          @if (form.get('fin')?.hasError('fechaMayorQueHoy')) { La fecha no es valida!!!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+      
+      <div>
+        <mat-radio-group aria-label="Select an option" formControlName="estado">
+          <mat-radio-button [value]="true">Completado</mat-radio-button>
+          <mat-radio-button [value]="false">En proceso</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <br />
+
+       
+      <button matButton="elevated">{{ edicion ? 'Editar' : 'Registrar' }}</button>
+    </form>
+  </div>
+</div>
+

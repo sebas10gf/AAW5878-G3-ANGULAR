@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -21,7 +20,6 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
     MatDatepickerModule,
     MatButtonModule,],
   templateUrl: './cuestionarios-insert.html',
-   providers: [provideNativeDateAdapter()],
   styleUrl: './cuestionarios-insert.css',
 })
 export class CuestionariosInsert implements OnInit{
@@ -47,7 +45,7 @@ export class CuestionariosInsert implements OnInit{
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      titulo: ['', Validators.required],
+      titulo: ['',[ Validators.required,Validators.maxLength(80)]],
       version: ['', Validators.required],
     });
   }

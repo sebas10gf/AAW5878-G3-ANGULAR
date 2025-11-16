@@ -1,5 +1,5 @@
 <div class="container">
-  <div style="text-align: center; margin: 5%"><h2>Registro de Cuestionarios</h2></div>
+  <div style="text-align: center; margin: 5%"><h2>{{ edicion ? 'Editar Cuestionario' : 'Registrar Cuestionario' }}</h2></div>
   <div style="text-align: center; margin: 5%">
     <form [formGroup]="form" (submit)="aceptar()">
       @if(edicion){
@@ -12,9 +12,9 @@
       <mat-form-field>
         <mat-label>Titulo de cuestionario</mat-label>
         <input matInput formControlName="titulo" />
-
         <mat-error>
           @if (form.get('titulo')?.hasError('required')) { El campo es obligatorio!!!! }
+          @if (form.get('titulo')?.hasError('maxlenght')) { El campo supera el limite(80 caracteres) }
         </mat-error>
       </mat-form-field>
 

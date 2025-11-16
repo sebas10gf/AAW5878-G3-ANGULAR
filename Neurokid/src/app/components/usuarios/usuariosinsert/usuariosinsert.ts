@@ -11,6 +11,17 @@ import { User } from '../../../models/User';
 import { Userservice } from '../../../services/userservice';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
+function fechaMenorIgualHoy(control: FormControl) {
+  if (!control.value) return null;
+
+  const fecha = new Date(control.value);
+  const hoy = new Date();
+  hoy.setHours(0,0,0,0);
+  fecha.setHours(0,0,0,0);
+
+  return fecha <= hoy ? null : { fechaMayorQueHoy: true };
+}
+
 @Component({
   selector: 'app-usuariosinsert',
   imports: [ ReactiveFormsModule,
@@ -23,6 +34,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   templateUrl: './usuariosinsert.html',
    providers: [provideNativeDateAdapter()],
   styleUrl: './usuariosinsert.css',
+
+  
 })
 export class Usuariosinsert implements OnInit {
   form: FormGroup = new FormGroup({});
@@ -30,11 +43,6 @@ export class Usuariosinsert implements OnInit {
 
   edicion: boolean = false;
   id: number = 0;
-  fecha: Date = new Date();
-  actual: Date = new Date();
-  update: Date = new Date();
-  error1: boolean = false;
-  error2: boolean = false;
 
   constructor(
     private sS: Userservice,
@@ -52,14 +60,20 @@ export class Usuariosinsert implements OnInit {
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      nombre: ['', Validators.required],
-      email: ['', Validators.required],
-      passwordhash: ['', Validators.required],
-      creado: ['', Validators.required],
-      actualizado: ['', Validators.required],
+      nombre: ['', [Validators.required,Validators.maxLength(30)]],
+      email: ['', [Validators.required,Validators.maxLength(50)]],
+      passwordhash: ['', [Validators.required,Validators.maxLength(200)]],
+      creado: ['', [Validators.required,fechaMenorIgualHoy]],
+      actualizado: ['', [Validators.required,fechaMenorIgualHoy]],
       estado: [false, Validators.required],
     });
   }
+
+  get minActualizado() {
+  return this.form.get('creado')?.value || null;
+}
+
+  
   aceptar(): void {
     if (this.form.valid) {
       this.u.userId = this.form.value.codigo;
@@ -69,18 +83,6 @@ export class Usuariosinsert implements OnInit {
       this.u.createdAt = this.form.value.creado;
       this.u.updatedAt = this.form.value.actualizado;
       this.u.enabled = this.form.value.estado;
-
-      this.fecha = this.form.value.creado;
-      this.update = this.form.value.actualizado;
-
-      if (this.fecha > this.actual){
-        this.error1 = true;
-      }
-
-      if (this.fecha > this.update){
-        this.error2 = true;
-      }
-
 
       if (this.edicion) {
          this.sS.update(this.u).subscribe((data) => {
@@ -110,6 +112,7 @@ export class Usuariosinsert implements OnInit {
           actualizado: new FormControl(data.updatedAt),
           estado: new FormControl(data.enabled),
         });
+
       });
     }
   }

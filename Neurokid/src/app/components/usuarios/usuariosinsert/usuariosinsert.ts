@@ -60,9 +60,9 @@ export class Usuariosinsert implements OnInit {
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      nombre: ['', Validators.required],
-      email: ['', Validators.required],
-      passwordhash: ['', Validators.required],
+      nombre: ['', [Validators.required,Validators.maxLength(30)]],
+      email: ['', [Validators.required,Validators.maxLength(50)]],
+      passwordhash: ['', [Validators.required,Validators.maxLength(200)]],
       creado: ['', [Validators.required,fechaMenorIgualHoy]],
       actualizado: ['', [Validators.required,fechaMenorIgualHoy]],
       estado: [false, Validators.required],

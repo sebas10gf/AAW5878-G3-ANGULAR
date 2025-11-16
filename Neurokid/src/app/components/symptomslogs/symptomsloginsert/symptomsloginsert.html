@@ -35,10 +35,13 @@
 
       <mat-form-field>
         <mat-label>estado</mat-label>
-        <input matInput formControlName="animo" required />
+        <input matInput formControlName="animo"  />
 
         @if (form.get('animo')?.hasError('required')) {
         <mat-error>El campo animo es obligatorio.</mat-error>
+        }
+        @if (form.get('animo')?.hasError('maxlenght')) {
+        <mat-error>El campo supera el limite</mat-error>
         }
       </mat-form-field>
       <br />
@@ -61,6 +64,7 @@
         <mat-datepicker #fecha></mat-datepicker>
         <mat-error>
           @if (form.get('fecha')?.hasError('required')) { La fecha es obligatoria!!!! }
+          @if (form.get('fecha')?.hasError('fechaMayorQueHoy')) { La fecha no es valida!!!! }
         </mat-error>
       </mat-form-field>
       <br />

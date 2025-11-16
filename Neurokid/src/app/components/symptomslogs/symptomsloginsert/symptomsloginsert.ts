@@ -13,6 +13,17 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Rolesservice } from '../../../services/rolesservice';
 import { Roles } from '../../../models/Roles';
 
+function fechaMenorIgualHoy(control: FormControl) {
+  if (!control.value) return null;
+
+  const fecha = new Date(control.value);
+  const hoy = new Date();
+  hoy.setHours(0,0,0,0);
+  fecha.setHours(0,0,0,0);
+
+  return fecha <= hoy ? null : { fechaMayorQueHoy: true };
+}
+
 @Component({
   selector: 'app-symptomsloginsert',
   imports: [ReactiveFormsModule,
@@ -56,10 +67,10 @@ form: FormGroup = new FormGroup({});
 
     this.form = this.formBuilder.group({
       id: [''],
-      usuario: ['', Validators.required],
-      animo: ['', Validators.required],
+      usuario: ['',Validators.required],
+      animo: ['', [Validators.required,Validators.maxLength(50)]],
       descripcion: ['', Validators.required],
-      fecha: ['', Validators.required],
+      fecha: ['', [Validators.required,fechaMenorIgualHoy]],
     });
   }
   aceptar(): void {
@@ -70,7 +81,7 @@ form: FormGroup = new FormGroup({});
       this.log.symptomNotes = this.form.value.descripcion;
       this.log.logDate = this.form.value.fecha;
       if (this.edicion) {
-        this.sS.update(this.log).subscribe(() => {
+        this.sS.update(this.log).subscribe((data) => {
           this.sS.list().subscribe((data) => {
             this.sS.setList(data);
           });

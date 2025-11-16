@@ -4,17 +4,12 @@ import { Usuariosinsert } from './components/usuarios/usuariosinsert/usuariosins
 import { CuestionariosInsert } from './components/cuestionarios/cuestionarios-insert/cuestionarios-insert';
 import { Cuestionarios } from './components/cuestionarios/cuestionarios';
 import { Perfil } from './components/usuarios/perfil/perfil';
-<<<<<<< HEAD
-import { Preguntas } from './components/preguntas/preguntas';
-import { PreguntasInsert } from './components/preguntas/preguntas-insert/preguntas-insert';
-=======
 import { Roles } from './components/roles/roles';
 import { Roleslinsert } from './components/roles/roleslinsert/roleslinsert';
 import { Goals } from './components/goals/goals';
 import { Goalinsert } from './components/goals/goalinsert/goalinsert';
 import { Symptomslogs } from './components/symptomslogs/symptomslogs';
 import { Symptomsloginsert } from './components/symptomslogs/symptomsloginsert/symptomsloginsert';
->>>>>>> main
 
 export const routes: Routes = [
     {path:'Users', component:Usuarios,
@@ -32,12 +27,6 @@ export const routes: Routes = [
         ]
     },
 
-<<<<<<< HEAD
-    {path:'Questions', component:Preguntas,
-        children:[
-            {path:'news',component:PreguntasInsert},
-            {path:'edits/:id',component:PreguntasInsert}
-=======
      {path:'Roles', component:Roles,
         children:[
             {path:'news',component:Roleslinsert},
@@ -56,7 +45,6 @@ export const routes: Routes = [
         children:[
             {path:'news',component:Symptomsloginsert},
             {path:'edits/:id',component:Symptomsloginsert}
->>>>>>> main
         ]
     }
     

@@ -10,6 +10,8 @@ import { Goals } from './components/goals/goals';
 import { Goalinsert } from './components/goals/goalinsert/goalinsert';
 import { Symptomslogs } from './components/symptomslogs/symptomslogs';
 import { Symptomsloginsert } from './components/symptomslogs/symptomsloginsert/symptomsloginsert';
+import { Preguntas } from './components/preguntas/preguntas';
+import { PreguntasInsert } from './components/preguntas/preguntas-insert/preguntas-insert';
 
 export const routes: Routes = [
     {path:'Users', component:Usuarios,
@@ -46,6 +48,12 @@ export const routes: Routes = [
             {path:'news',component:Symptomsloginsert},
             {path:'edits/:id',component:Symptomsloginsert}
         ]
-    }
-    
+    },
+
+    {path:'Questions', component:Preguntas,
+        children:[
+            {path:'news',component:PreguntasInsert},
+            {path:'edits/:id',component:PreguntasInsert}
+        ]
+    },
 ];

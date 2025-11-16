@@ -12,9 +12,9 @@
       <mat-form-field>
         <mat-label>Nombre</mat-label>
         <input matInput formControlName="nombre" />
-
         <mat-error>
           @if (form.get('nombre')?.hasError('required')) { El campo es obligatorio!!!! }
+          @if (form.get('nombre')?.hasError('maxlenght')) { El campo supera el limite(30 caracteres) }
         </mat-error>
       </mat-form-field>
 
@@ -25,6 +25,7 @@
         <input matInput formControlName="email" />
         <mat-error>
           @if (form.get('email')?.hasError('required')) { La versión es obligatoria!!!! }
+          @if (form.get('email')?.hasError('maxlenght')) { El campo supera el limite(50 caracteres) }
         </mat-error>
       </mat-form-field>
       <br />
@@ -33,6 +34,7 @@
        <input matInput formControlName="passwordhash" />
         <mat-error>
           @if (form.get('passwordhash')?.hasError('required')) { El campo es obligatorio!!!! }
+          @if (form.get('passwordhash')?.hasError('maxlenght')) { El campo supera el limite(200 caracteres) }
         </mat-error>
       </mat-form-field>
       <br />
@@ -59,7 +61,7 @@
         <mat-error>
           @if (form.get('actualizado')?.hasError('required')) { La fecha es obligatoria!!!! }
           @if (form.get('actualizado')?.hasError('min')) { La fecha no es valida!!!! }
-          @if (form.get('actualizado')?.hasError('fechaMayorQueHoy2')) { La fecha no es valida!!!! }
+          @if (form.get('actualizado')?.hasError('fechaMayorQueHoy')) { La fecha no es valida!!!! }
         </mat-error>
       </mat-form-field>
       <br />

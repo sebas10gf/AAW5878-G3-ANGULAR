@@ -13,6 +13,17 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Roles } from '../../../models/Roles';
 import { Rolesservice } from '../../../services/rolesservice';
 
+function fechaMenorIgualHoy(control: FormControl) {
+  if (!control.value) return null;
+
+  const fecha = new Date(control.value);
+  const hoy = new Date();
+  hoy.setHours(0,0,0,0);
+  fecha.setHours(0,0,0,0);
+
+  return fecha <= hoy ? null : { fechaMayorQueHoy: true };
+}
+
 @Component({
   selector: 'app-goalinsert',
   imports: [ReactiveFormsModule,
@@ -58,11 +69,16 @@ export class Goalinsert implements OnInit {
       id: [''],
       usuario: ['', Validators.required],
       descripcion: ['', Validators.required],
-      inicio: ['', Validators.required],
-      fin: ['', Validators.required],
+      inicio: ['',[Validators.required,fechaMenorIgualHoy]],
+      fin: ['', [Validators.required,fechaMenorIgualHoy]],
       estado: ['', Validators.required],
     });
   }
+
+  get minActualizado() {
+  return this.form.get('inicio')?.value || null;
+  }
+
   aceptar(): void {
     if (this.form.valid) {
       this.goal.goalId = this.form.value.id;
@@ -72,7 +88,7 @@ export class Goalinsert implements OnInit {
       this.goal.endDate = this.form.value.fin;
       this.goal.status = this.form.value.estado;
       if (this.edicion) {
-        this.gS.update(this.goal).subscribe(() => {
+        this.gS.update(this.goal).subscribe((data) => {
           this.gS.list().subscribe((data) => {
             this.gS.setList(data);
           });

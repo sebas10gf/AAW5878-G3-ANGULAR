@@ -50,19 +50,23 @@
         <mat-datepicker-toggle matIconSuffix [for]="inicio"></mat-datepicker-toggle>
         <mat-datepicker #inicio></mat-datepicker>
         <mat-error>
-          @if (form.get('creado')?.hasError('required')) { La fecha es obligatoria!!!! }
+          @if (form.get('inicio')?.hasError('required')) { La fecha es obligatoria!!!! }
+          @if (form.get('inicio')?.hasError('fechaMayorQueHoy')) { La fecha no es valida!!!! }
+
         </mat-error>
       </mat-form-field>
       <br />
 
        <mat-form-field>
         <mat-label>fecha de cumplimiento</mat-label>
-        <input matInput [matDatepicker]="fin" formControlName="fin" />
+        <input matInput [matDatepicker]="fin" formControlName="fin" [min]="minActualizado"/>
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="fin"></mat-datepicker-toggle>
         <mat-datepicker #fin></mat-datepicker>
         <mat-error>
-          @if (form.get('actualizado')?.hasError('required')) { La fecha es obligatoria!!!! }
+          @if (form.get('fin')?.hasError('required')) { La fecha es obligatoria!!!! }
+          @if (form.get('fin')?.hasError('min')) { La fecha no es valida!!!! }
+          @if (form.get('fin')?.hasError('fechaMayorQueHoy')) { La fecha no es valida!!!! }
         </mat-error>
       </mat-form-field>
       <br />

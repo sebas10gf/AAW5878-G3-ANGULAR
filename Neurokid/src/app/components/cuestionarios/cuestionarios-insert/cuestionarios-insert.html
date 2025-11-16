@@ -14,7 +14,7 @@
         <input matInput formControlName="titulo" />
         <mat-error>
           @if (form.get('titulo')?.hasError('required')) { El campo es obligatorio!!!! }
-          @if (form.get('titulo')?.hasError('maxlenght')) { El campo es obligatorio!!!! }
+          @if (form.get('titulo')?.hasError('maxlenght')) { El campo supera el limite(80 caracteres) }
         </mat-error>
       </mat-form-field>
 

@@ -47,7 +47,7 @@ export class CuestionariosInsert implements OnInit{
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      titulo: ['', Validators.required],
+      titulo: ['',[ Validators.required,Validators.maxLength(80)]],
       version: ['', Validators.required],
     });
   }

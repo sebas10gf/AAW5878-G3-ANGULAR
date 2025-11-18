@@ -1,1 +1,4 @@
-<p>respuestas works!</p>
+<router-outlet></router-outlet>
+<div [hidden]="route.children.length !== 0">
+  <app-respuestas-listar></app-respuestas-listar>
+</div>

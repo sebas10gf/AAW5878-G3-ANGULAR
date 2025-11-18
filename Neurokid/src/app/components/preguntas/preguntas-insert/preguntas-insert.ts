@@ -72,7 +72,7 @@ export class PreguntasInsert implements OnInit {
           });
         });
       }
-      this.router.navigate(['questions']);
+      this.router.navigate(['Questions']);
     }
   }
 

@@ -1,0 +1,10 @@
+import { Questions } from "./Questions";
+import { User } from "./User";
+
+export class QuestionAnswers {
+    answer_id:number = 0;
+    answer_value:number = 0;
+    answered_at:Date = new Date();
+    userId: User = new User();
+    question_id: Questions = new Questions();
+}

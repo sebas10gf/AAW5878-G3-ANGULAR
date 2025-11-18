@@ -12,6 +12,10 @@ import { Symptomslogs } from './components/symptomslogs/symptomslogs';
 import { Symptomsloginsert } from './components/symptomslogs/symptomsloginsert/symptomsloginsert';
 import { Preguntas } from './components/preguntas/preguntas';
 import { PreguntasInsert } from './components/preguntas/preguntas-insert/preguntas-insert';
+import { Respuestas } from './components/respuestas/respuestas';
+import { RespuestasInsert } from './components/respuestas/respuestas-insert/respuestas-insert';
+import { Predicciones } from './components/predicciones/predicciones';
+import { PrediccionesInsert } from './components/predicciones/predicciones-insert/predicciones-insert';
 
 export const routes: Routes = [
     {path:'Users', component:Usuarios,
@@ -54,6 +58,20 @@ export const routes: Routes = [
         children:[
             {path:'news',component:PreguntasInsert},
             {path:'edits/:id',component:PreguntasInsert}
+        ]
+    },
+
+    {path:'QuestionsAnswers', component:Respuestas,
+        children:[
+            {path:'news',component:RespuestasInsert},
+            {path:'edits/:id',component:RespuestasInsert}
+        ]
+    },
+
+    {path:'Prediction', component:Predicciones,
+        children:[
+            {path:'news',component:PrediccionesInsert},
+            {path:'edits/:id',component:PrediccionesInsert}
         ]
     },
 ];

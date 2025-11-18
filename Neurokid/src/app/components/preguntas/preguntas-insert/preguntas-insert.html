@@ -17,7 +17,7 @@
             <br/>
             <mat-form-field>
                 <mat-label>Pregunta</mat-label>
-                <input matInput formCOntrolName="pregunta" required />
+                <input matInput formControlName="pregunta" required />
 
                 @if (form.get('pregunta')?.hasError('required')) {
                     <mat-error>El campo pregunta es obligatorio.</mat-error>

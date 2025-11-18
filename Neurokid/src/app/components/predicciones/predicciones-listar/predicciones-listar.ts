@@ -15,7 +15,7 @@ import { Predictionservice } from '../../../services/predictionservice';
 })
 export class PrediccionesListar implements OnInit {
   dataSource: MatTableDataSource<Prediction> = new MatTableDataSource();
-  DisplayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];
 
   constructor(private pS: Predictionservice) {}
 

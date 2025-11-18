@@ -1,1 +1,73 @@
-<p>predicciones-insert works!</p>
+<div class = "container">
+    <div style = "text-align: center; margin: 3%">
+        <h2>{{ edicion ? 'Editar Predicción' : 'Registrar Predicción' }}</h2>
+    </div>
+    <div style = "text-align: center;">
+        <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+            @if(edicion) {
+                <mat-form-field>
+                    <mat-label>Código</mat-label>
+                    <input matInput formControlName="id" required />
+
+                    @if (form.get('id')?.hasError('required')) {
+                        <mat-error>El campo id es obligatorio.</mat-error>
+                    }
+                </mat-form-field>
+            }
+            <br/>
+
+            <mat-form-field>
+                <mat-label>Puntaje</mat-label>
+                <input matInput formControlName="puntaje" required />
+
+                @if (form.get('puntaje')?.hasError('required')) {
+                    <mat-error>El campo puntaje es obligatorio.</mat-error>
+                }
+            </mat-form-field>
+            <br/>
+
+            <mat-form-field>
+                <mat-label>Texto</mat-label>
+                <input matInput formControlName="texto" required />
+
+                @if (form.get('texto')?.hasError('required')) {
+                    <mat-error>El campo texto es obligatorio.</mat-error>
+                }
+            </mat-form-field>
+            <br/>
+
+            <mat-form-field>
+                <mat-label>Predicción</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="fecha" [max]="today" required />
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+
+                @if (form.get('prediccion')?.hasError('required')) {
+                    <mat-error>El campo prediccion es obligatorio.</mat-error>
+                }
+            </mat-form-field>
+            <br/>
+
+            <div>
+                <mat-form-field class="example-full-width">
+                <mat-label>Usuario:</mat-label>
+                <mat-select formControlName="usuario" required>
+                    @for (p of listaUsuario; track p.userId) {
+                    <mat-option [value]="p.userId">
+                    {{ p.username }}
+                    </mat-option>
+                }
+                </mat-select>
+
+                @if (form.get('usuario')?.hasError('required')) {
+                <mat-error>El campo Usuario es obligatorio.</mat-error>
+                }
+                </mat-form-field>
+            </div>
+            <br/>
+
+            <button matButton="elevated">{{ edicion ? 'Editar' : 'Registrar' }}</button>
+        </form>
+    </div>
+</div>

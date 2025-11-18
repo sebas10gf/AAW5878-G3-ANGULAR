@@ -5,5 +5,5 @@ export class Prediction {
     predictionScore: number = 0;
     explanationText: string = "";
     predictedAt: Date = new Date();
-    userId: User = new User();
+    usuario: User = new User();
 }

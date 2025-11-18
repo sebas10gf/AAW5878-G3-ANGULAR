@@ -57,7 +57,7 @@ export class PreguntasInsert implements OnInit {
     if (this.form.valid) {
       this.que.question_id = this.form.value.id;
       this.que.question_text = this.form.value.pregunta;
-      this.que.questionnaire.title = this.form.value.cuestionario;
+      this.que.questionnaire.questionnaire_id = this.form.value.cuestionario;
 
       if(this.edicion) {
         this.qS.update(this.que).subscribe(() => {
@@ -82,7 +82,7 @@ export class PreguntasInsert implements OnInit {
         this.form = new FormGroup({
           id: new FormControl(data.question_id),
           pregunta: new FormControl(data.question_text),
-          cuestionario: new FormControl(data.questionnaire.title)
+          cuestionario: new FormControl(data.questionnaire.questionnaire_id)
         });
       });
     }

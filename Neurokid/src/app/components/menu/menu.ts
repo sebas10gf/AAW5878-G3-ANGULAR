@@ -4,6 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
+import { loginservice } from '../../services/loginservice';
 
 @Component({
   selector: 'app-menu',
@@ -12,5 +13,25 @@ import { RouterLink } from '@angular/router';
   styleUrl: './menu.css',
 })
 export class Menu {
+  role: string = '';
+  usuario: string = '';
 
+  constructor(private loginService: loginservice) {}
+
+  cerrar() {
+    sessionStorage.clear();
+  }
+
+  verificar() {
+    this.role = this.loginService.showRole();
+    return this.loginService.verificar();
+  }
+
+  isAdmin() {
+    return this.role === 'ADMIN';
+  }
+
+  isProfesional() {
+    return this.role === 'PROFESIONAL';
+  }
 }

@@ -21,6 +21,8 @@ import { seguridadGuardGuard } from './guard/seguridad-guard-guard';
 import { Home } from './components/home/home';
 import { Linkedprofile } from './components/linkedprofile/linkedprofile';
 import { Linkedprofileinsert } from './components/linkedprofile/linkedprofileinsert/linkedprofileinsert';
+import { PreguntasListar } from './components/preguntas/preguntas-listar/preguntas-listar';
+import { Busquedas } from './components/preguntas/busquedas/busquedas';
 
 export const routes: Routes = [
     {
@@ -78,7 +80,8 @@ export const routes: Routes = [
     {path:'Questions', component:Preguntas,
         children:[
             {path:'news',component:PreguntasInsert},
-            {path:'edits/:id',component:PreguntasInsert}
+            {path:'edits/:id',component:PreguntasInsert},
+            { path: 'busquedas', component: Busquedas },
         ],
         canActivate: [seguridadGuardGuard],
     },

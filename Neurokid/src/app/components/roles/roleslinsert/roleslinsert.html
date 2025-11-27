@@ -28,23 +28,11 @@
         <mat-form-field class="example-full-width">
           <mat-label>usuario:</mat-label>
           <mat-select formControlName="usuario" required>
-            @if (edicion) {
-               <mat-option [value]="user.userId">
-                {{ user.username }}
-              </mat-option>
                @for (u of usuariosSinRol; track u.userId) {
               <mat-option [value]="u.userId">
                 {{ u.username }}
               </mat-option>
             }
-          }
-          @else {
-            @for (u of usuariosSinRol; track u.userId) {
-              <mat-option [value]="u.userId">
-                {{ u.username }}
-              </mat-option>
-            }
-          }
           </mat-select>
 
           @if (form.get('usuario')?.hasError('required')) {

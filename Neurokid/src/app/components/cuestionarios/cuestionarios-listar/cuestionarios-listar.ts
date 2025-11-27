@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Questionnaries } from '../../../models/Questionnaries';
 import { Questionnariesservice } from '../../../services/questionnariesservice';
 
@@ -14,9 +14,10 @@ import { Questionnariesservice } from '../../../services/questionnariesservice';
 })
 export class CuestionariosListar implements OnInit{
   dataSource: MatTableDataSource<Questionnaries> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5','c6'];
 
-  constructor(private cS: Questionnariesservice) {}
+  constructor(private cS: Questionnariesservice, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.cS.list().subscribe((data) => {
@@ -32,5 +33,8 @@ export class CuestionariosListar implements OnInit{
         this.cS.setList(data);
       });
     });
+  }
+  Preguntas(id:number): void {
+  this.router.navigate(['Questions','busquedas']);
   }
 }

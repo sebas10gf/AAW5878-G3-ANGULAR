@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, numberAttribute } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Subject } from 'rxjs';
 import { Questions } from '../models/Questions';
 import { HttpClient } from '@angular/common/http';
+import { Params } from '@angular/router';
 
 const base_url = environment.base
 
@@ -43,4 +44,9 @@ export class Questionsservice {
     delete(id: number) {
       return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
     }
+
+    search(id: number) {
+      const params = {id};
+    return this.http.get<Questions[]>(`${this.url}/busquedas`, {params});
+  }
 }

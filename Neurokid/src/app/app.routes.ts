@@ -19,6 +19,8 @@ import { PrediccionesInsert } from './components/predicciones/predicciones-inser
 import { Autenticador } from './components/autenticador/autenticador';
 import { seguridadGuardGuard } from './guard/seguridad-guard-guard';
 import { Home } from './components/home/home';
+import { Linkedprofile } from './components/linkedprofile/linkedprofile';
+import { Linkedprofileinsert } from './components/linkedprofile/linkedprofileinsert/linkedprofileinsert';
 
 export const routes: Routes = [
     {
@@ -99,6 +101,15 @@ export const routes: Routes = [
     {
         path: 'homes',
         component: Home,
+        canActivate: [seguridadGuardGuard],
+    },
+    {
+        path: 'LinkedProfile',
+        component: Linkedprofile,
+        children:[
+            {path:'news',component:Linkedprofileinsert},
+            {path:'edits/:id',component:Linkedprofileinsert}
+        ],
         canActivate: [seguridadGuardGuard],
     },
 ];

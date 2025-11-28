@@ -15,8 +15,7 @@ import { loginservice } from '../../services/loginservice';
 export class Menu {
   role: string = '';
   usuario: string = '';
-
-  constructor(private loginService: loginservice) {}
+  constructor(private loginService: loginservice,) {}
 
   cerrar() {
     sessionStorage.clear();
@@ -24,8 +23,10 @@ export class Menu {
 
   verificar() {
     this.role = this.loginService.showRole();
+    this.usuario = this.loginService.showName();
     return this.loginService.verificar();
   }
+
 
   isAdmin() {
     return this.role === 'ADMIN';

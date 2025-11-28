@@ -29,4 +29,16 @@ export class loginservice {
     const decodedToken = helper.decodeToken(token);
     return decodedToken?.role;
   }
+
+  showName() {
+    let token = sessionStorage.getItem('token');
+    if(!token) {
+      return null;
+    }
+
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(token);
+    return decodedToken?.nombre;
+  }
+
 }

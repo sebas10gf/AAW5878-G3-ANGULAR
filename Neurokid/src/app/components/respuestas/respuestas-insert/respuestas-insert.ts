@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE, MAT_DATE_FORMATS, DateAdapter, NativeDateAdapter, provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
@@ -15,10 +15,22 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Userservice } from '../../../services/userservice';
 import { Questionsservice } from '../../../services/questionsservice';
 
+export const MY_DATE_FORMATS = {
+  parse: { dateInput: 'DD/MM/YYYY' },
+  display: {
+    dateInput: 'DD/MM/YYYY'
+  }
+}
+
 @Component({
   selector: 'app-respuestas-insert',
   imports: [ ReactiveFormsModule, MatInputModule, MatDatepickerModule, MatSelectModule, CommonModule, MatRadioModule, MatNativeDateModule, MatButtonModule ],
   templateUrl: './respuestas-insert.html',
+  providers: [provideNativeDateAdapter(), 
+    { provide: DateAdapter, useClass: NativeDateAdapter },
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+  ],
   styleUrl: './respuestas-insert.css',
 })
 export class RespuestasInsert implements OnInit {

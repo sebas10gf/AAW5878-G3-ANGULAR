@@ -1,9 +1,10 @@
 mat-form-field {
     width: 50%;
 }
-  button[mat-raised-button] {
- background-color:rgb(251, 140, 0);
- color: white;
+
+button[mat-raised-button] {
+ background-color:#9BD380;
+ color: black;
  border: none;
  padding: 0.5rem 1.25rem;
  font-size: 1.1rem;

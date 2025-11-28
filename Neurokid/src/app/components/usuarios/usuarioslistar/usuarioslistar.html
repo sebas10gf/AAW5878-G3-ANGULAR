@@ -20,7 +20,7 @@
 
       <ng-container matColumnDef="c4">
         <th mat-header-cell *matHeaderCellDef>updatedAt</th>
-        <td mat-cell *matCellDef="let element">{{ element.updatedAt }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.updatedAt | date: "dd/MM/yy" }}</td>
       </ng-container>
 
       <ng-container matColumnDef="c5">

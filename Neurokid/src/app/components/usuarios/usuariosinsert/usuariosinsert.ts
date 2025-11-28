@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import { provideNativeDateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS, DateAdapter, NativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -22,6 +22,13 @@ function fechaMenorIgualHoy(control: FormControl) {
   return fecha <= hoy ? null : { fechaMayorQueHoy: true };
 }
 
+export const MY_DATE_FORMATS = {
+  parse: { dateInput: 'DD/MM/YYYY' },
+  display: {
+    dateInput: 'DD/MM/YYYY'
+  }
+}
+
 @Component({
   selector: 'app-usuariosinsert',
   imports: [ ReactiveFormsModule,
@@ -30,12 +37,15 @@ function fechaMenorIgualHoy(control: FormControl) {
     MatSelectModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatButtonModule,],
+    MatButtonModule,
+  ],
   templateUrl: './usuariosinsert.html',
-   providers: [provideNativeDateAdapter()],
+  providers: [provideNativeDateAdapter(), 
+    { provide: DateAdapter, useClass: NativeDateAdapter },
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+  ],
   styleUrl: './usuariosinsert.css',
-
-  
 })
 export class Usuariosinsert implements OnInit {
   form: FormGroup = new FormGroup({});

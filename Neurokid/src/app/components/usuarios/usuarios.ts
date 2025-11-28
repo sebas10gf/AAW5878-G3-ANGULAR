@@ -4,7 +4,7 @@ import { Usuarioslistar } from './usuarioslistar/usuarioslistar';
 
 @Component({
   selector: 'app-usuarios',
-  imports: [RouterOutlet,Usuarioslistar],
+  imports: [RouterOutlet, Usuarioslistar],
   templateUrl: './usuarios.html',
   styleUrl: './usuarios.css',
 })

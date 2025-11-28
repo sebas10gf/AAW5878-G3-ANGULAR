@@ -11,12 +11,24 @@ import { Predictionservice } from '../../../services/predictionservice';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Userservice } from '../../../services/userservice';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE, MAT_DATE_FORMATS, DateAdapter, NativeDateAdapter, provideNativeDateAdapter } from '@angular/material/core';
+
+export const MY_DATE_FORMATS = {
+  parse: { dateInput: 'DD/MM/YYYY' },
+  display: {
+    dateInput: 'DD/MM/YYYY'
+  }
+}
 
 @Component({
   selector: 'app-predicciones-insert',
   imports: [ ReactiveFormsModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule, CommonModule, MatRadioModule, MatButtonModule ],
   templateUrl: './predicciones-insert.html',
+  providers: [provideNativeDateAdapter(), 
+      { provide: DateAdapter, useClass: NativeDateAdapter },
+      { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+      { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+    ],
   styleUrl: './predicciones-insert.css',
 })
 export class PrediccionesInsert implements OnInit {

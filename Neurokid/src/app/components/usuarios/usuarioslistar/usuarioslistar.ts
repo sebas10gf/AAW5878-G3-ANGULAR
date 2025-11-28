@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -7,6 +7,7 @@ import { User } from '../../../models/User';
 import { Userservice } from '../../../services/userservice';
 import { CommonModule } from '@angular/common';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-usuarioslistar',
@@ -19,6 +20,8 @@ export class Usuarioslistar implements OnInit {
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6','c7','c8'];
 
   constructor(private sS: Userservice) {}
+
+  private _snackBar = inject(MatSnackBar)
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -44,5 +47,9 @@ export class Usuarioslistar implements OnInit {
         this.sS.setList(data);
       });
     });
+  }
+
+  openSnackBar() {
+    this._snackBar.open("Eliminado correctamente", "Cerrar", {duration: 2000})
   }
 }

@@ -49,7 +49,7 @@
         <td mat-cell *matCellDef="let element">
               <button 
               matButton
-              (click)="eliminar(element.userId)"
+              (click)="eliminar(element.userId)" (click) = "openSnackBar()"
               >
                 <mat-icon>delete</mat-icon>
               

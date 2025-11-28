@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router';
 import { LinkedProfile } from '../../../models/LinkedProfile';
 import { LinkedProfileservice } from '../../../services/linked-profileservice';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-linkedprofilelistar',
@@ -19,6 +20,8 @@ export class Linkedprofilelistar {
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5','c6','c7'];
 
   constructor(private lS: LinkedProfileservice) { }
+
+  private _snackBar = inject(MatSnackBar)
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -45,5 +48,8 @@ export class Linkedprofilelistar {
       });
     });
   }
-
+  
+  openSnackBar() {
+    this._snackBar.open("Eliminado correctamente", "Cerrar", {duration: 2000})
+  }
 }

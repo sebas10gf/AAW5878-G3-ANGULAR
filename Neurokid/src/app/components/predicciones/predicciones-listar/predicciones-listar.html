@@ -43,7 +43,7 @@
                 <th mat-header-cell *matHeaderCellDef>Eliminar</th>
                 <td mat-cell *matCellDef="let element">
                 <button  matButton 
-                    (click)="eliminar(element.predictionId)" >
+                    (click)="eliminar(element.predictionId)" (click) = "openSnackBar()">
                     <mat-icon>delete</mat-icon>
             
                 </button>

@@ -22,19 +22,34 @@ import { Userservice } from '../../../services/userservice';
     CommonModule,
     MatRadioModule,
     MatNativeDateModule,
-    MatButtonModule,],
+    MatButtonModule],
   templateUrl: './roleslinsert.html',
   styleUrl: './roleslinsert.css',
 })
+
+
 export class Roleslinsert implements OnInit{
   form: FormGroup = new FormGroup({});
   rol: Roles = new Roles();
   edicion: boolean = false;
 
   listaUsers: User[] = [];
+  listaRoles: Roles[] = [];
+
+  user:User = new User();
 
   id: number = 0;
 
+  usuariosSinRol: User[] = [];
+
+  filtrarUsuariosSinRol() {
+  const usuariosConRolIds = this.listaRoles.map(r => r.user.userId);
+
+  this.usuariosSinRol = this.listaUsers.filter(
+    u =>!usuariosConRolIds.includes(u.userId)
+  );
+}
+  
   constructor(
     private rS: Rolesservice,
     private router: Router,
@@ -43,17 +58,26 @@ export class Roleslinsert implements OnInit{
     private uS: Userservice
   ) {}
 
+  
+
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
       this.init();
+
+    });
+
+    this.rS.list().subscribe((data) => {
+      this.listaRoles = data;
     });
 
     this.uS.list().subscribe((data) => {
       this.listaUsers = data;
+      this.filtrarUsuariosSinRol();
     });
 
+    
     this.form = this.formBuilder.group({
       id: [''],
       nombre: ['', Validators.required],
@@ -84,12 +108,13 @@ export class Roleslinsert implements OnInit{
   init() {
     if (this.edicion) {
       this.rS.listId(this.id).subscribe((data) => {
+        this.user = data.user;
         this.form = new FormGroup({
           id: new FormControl(data.roleId),
           nombre: new FormControl(data.role_name),
-          usuario:new FormControl(data.user.userId)
+          usuario:new FormControl(data.user.userId),
+          });
         });
-      });
     }
   }
 }

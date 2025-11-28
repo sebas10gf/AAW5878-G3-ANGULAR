@@ -1,0 +1,87 @@
+<div class="container">
+  <div style="text-align: center; margin: 3%">
+    <h2>{{ edicion ? 'Editar Link' : 'Registrar Link' }}</h2>
+  </div>
+  <div style="text-align: center; ">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+      @if (edicion) {
+      <mat-form-field>
+        <mat-label>Código</mat-label>
+        <input matInput formControlName="id" required />
+
+        @if (form.get('id')?.hasError('required')) {
+        <mat-error>El campo id es obligatorio.</mat-error>
+        }
+      </mat-form-field>
+      }
+      <br />
+
+      <div>
+        <mat-form-field class="example-full-width">
+          <mat-label>Tutor:</mat-label>
+          <mat-select formControlName="tutor" required>
+            @for (p of listaUsersT; track p.roleId) {
+            <mat-option [value]="p.user.userId">
+              {{ p.user.username }}
+            </mat-option>
+            }
+          </mat-select>
+
+          @if (form.get('tutor')?.hasError('required')) {
+          <mat-error>El campo tipo es obligatorio.</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <br />
+
+      <div>
+        <mat-form-field class="example-full-width">
+          <mat-label>Niño:</mat-label>
+          <mat-select formControlName="niño" required>
+            @for (p of listaUsersC; track p.roleId) {
+            <mat-option [value]="p.user.userId">
+              {{ p.user.username }}
+            </mat-option>
+            }
+          </mat-select>
+
+          @if (form.get('niño')?.hasError('required')) {
+          <mat-error>El campo tipo es obligatorio.</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <br />
+
+      <div>
+        <mat-form-field class="example-full-width">
+          <mat-label>Psicologo</mat-label>
+          <mat-select formControlName="psicologo" required>
+            @for (p of listaUsersP; track p.roleId) {
+            <mat-option [value]="p.user.userId">
+              {{ p.user.username }}
+            </mat-option>
+            }
+          </mat-select>
+
+          @if (form.get('psicologo')?.hasError('required')) {
+          <mat-error>El campo tipo es obligatorio.</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <br />
+      
+      <div>
+        <mat-radio-group aria-label="Select an option" formControlName="estado">
+          <mat-radio-button [value]="true">Activo</mat-radio-button>
+          <mat-radio-button [value]="false">Inactivo</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <br />
+
+       
+      <button matButton="elevated">{{ edicion ? 'Editar' : 'Registrar' }}</button>
+    </form>
+  </div>
+</div>
+
+

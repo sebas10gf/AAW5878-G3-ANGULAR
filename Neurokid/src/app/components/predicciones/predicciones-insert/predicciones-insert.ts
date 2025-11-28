@@ -61,7 +61,7 @@ export class PrediccionesInsert implements OnInit {
       this.pre.predictionScore = this.form.value.puntaje;
       this.pre.explanationText = this.form.value.texto;
       this.pre.predictedAt = this.form.value.prediccion;
-      this.pre.usuario.username = this.form.value.usuario;
+      this.pre.usuario.userId = this.form.value.usuario;
 
       if(this.edicion) {
         this.pS.update(this.pre).subscribe(() => {
@@ -88,7 +88,7 @@ export class PrediccionesInsert implements OnInit {
           puntaje: new FormControl(data.predictionScore),
           texto: new FormControl(data.explanationText),
           prediccion: new FormControl(data.predictedAt),
-          usuario: new FormControl(data.usuario.username)
+          usuario: new FormControl(data.usuario.userId)
         });
       });
     }

@@ -39,7 +39,7 @@ export class Autenticador implements OnInit {
       },
       (error) => {
         this.mensaje = 'Credenciales incorrectas';
-        this.snackBar.open(this.mensaje, 'Aviso', {duration: 2000 });
+        this.snackBar.open(this.mensaje, 'Cerrar', {duration: 2000 });
       }
     )
   }

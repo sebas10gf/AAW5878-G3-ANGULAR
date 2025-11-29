@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { JwtModule } from '@auth0/angular-jwt';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export function tokenGetter() {
   if(typeof window === 'undefined') {

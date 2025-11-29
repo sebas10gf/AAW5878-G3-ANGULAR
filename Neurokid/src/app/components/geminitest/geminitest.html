@@ -1,0 +1,16 @@
+<div style="padding: 20px;">
+  <h2>Prueba de Gemini</h2>
+
+  <input
+    type="text"
+    [(ngModel)]="prompt"
+    placeholder="Escribe algo…"
+    style="width:70%; padding:8px;" />
+
+  <button (click)="sendPrompt()">Enviar</button>
+
+  <div *ngIf="response" style="margin-top:20px;">
+    <h3>Respuesta:</h3>
+    <p>{{ response }}</p>
+  </div>
+</div>

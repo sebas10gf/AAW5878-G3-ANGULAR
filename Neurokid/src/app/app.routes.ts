@@ -23,8 +23,14 @@ import { Linkedprofile } from './components/linkedprofile/linkedprofile';
 import { Linkedprofileinsert } from './components/linkedprofile/linkedprofileinsert/linkedprofileinsert';
 import { PreguntasListar } from './components/preguntas/preguntas-listar/preguntas-listar';
 import { Busquedas } from './components/preguntas/busquedas/busquedas';
+import { Geminitest } from './components/geminitest/geminitest';
 
 export const routes: Routes = [
+     {
+    path: 'chat-test',
+    component: Geminitest
+    },
+
     {
         path: '',
         redirectTo: 'login',

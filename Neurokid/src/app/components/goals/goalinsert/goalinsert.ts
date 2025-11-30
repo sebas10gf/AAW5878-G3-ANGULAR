@@ -12,6 +12,7 @@ import { Goalservice } from '../../../services/goalservice';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Roles } from '../../../models/Roles';
 import { Rolesservice } from '../../../services/rolesservice';
+import { loginservice } from '../../../services/loginservice';
 
 function fechaMenorIgualHoy(control: FormControl) {
   if (!control.value) return null;
@@ -63,7 +64,8 @@ export class Goalinsert implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private rS: Rolesservice
+    private rS: Rolesservice,
+    private ls: loginservice
   ) {}
 
   ngOnInit(): void {
@@ -74,7 +76,7 @@ export class Goalinsert implements OnInit {
     });
 
     this.rS.list().subscribe((data) => {
-      this.listaUsers = data.filter(u => u.role_name === "KID");;
+      this.listaUsers = data.filter(u => u.role_name === "CHILD");;
     });
 
     this.form = this.formBuilder.group({
@@ -112,7 +114,11 @@ export class Goalinsert implements OnInit {
           });
         });
       }
-      this.router.navigate(['Goal']);
+      if(this.ls.showRole() == "TUTOR"){
+        this.router.navigate(['Goal/childs']);
+      }
+      else{
+      this.router.navigate(['Goal']);}
     }
   }
   init() {

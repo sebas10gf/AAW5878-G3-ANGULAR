@@ -19,9 +19,9 @@
       <div>
         <mat-form-field class="example-full-width">
           <mat-label>usuario:</mat-label>
-          <mat-select formControlName="usuario" required>
-            @for (p of listaUsers; track p.roleId) {
-            <mat-option [value]="p.roleId">
+          <mat-select formControlName="niño" required>
+            @for (p of listaUsers; track p.user.userId) {
+            <mat-option [value]="p.user.userId">
               {{ p.user.username }}
             </mat-option>
             }

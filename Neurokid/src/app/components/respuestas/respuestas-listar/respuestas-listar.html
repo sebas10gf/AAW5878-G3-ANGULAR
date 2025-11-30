@@ -11,7 +11,13 @@
 
             <ng-container matColumnDef="c2">
                 <th mat-header-cell *matHeaderCellDef>Valor</th>
-                <td mat-cell *matCellDef="let element">{{ element.answer_value }}</td>
+                <td mat-cell *matCellDef="let element">
+                    @if (element.answer_value == "1") {Muy en desacuerdo}
+                    @if (element.answer_value == "2") {En desacuerdo}
+                    @if (element.answer_value == "3") {Indiferente}
+                    @if (element.answer_value == "4") {De acuerdo}
+                    @if (element.answer_value == "5") {Muy de acuerdo}
+                </td>
             </ng-container>
 
             <ng-container matColumnDef="c3">

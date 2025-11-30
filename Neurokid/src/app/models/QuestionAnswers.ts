@@ -6,5 +6,5 @@ export class QuestionAnswers {
     answer_value:number = 0;
     answered_at:Date = new Date();
     user: User = new User();
-    question: Questions = new Questions();
+    questions: Questions = new Questions();
 }

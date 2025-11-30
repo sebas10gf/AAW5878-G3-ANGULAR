@@ -35,4 +35,8 @@ export class Menu {
   isProfesional() {
     return this.role === 'PROFESIONAL';
   }
+
+  isTutor() {
+    return this.role === 'TUTOR';
+  }
 }

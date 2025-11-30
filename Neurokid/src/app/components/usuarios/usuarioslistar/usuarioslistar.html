@@ -1,83 +1,60 @@
 <div class="container">
- <div style="text-align: center;margin: 5%;"> <h2>Lista de Usuarios</h2></div>
-  <div>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-      <ng-container matColumnDef="c1">
-        <th mat-header-cell *matHeaderCellDef>ID</th>
-        <td mat-cell *matCellDef="let element">{{ element.userId }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="c2">
-        <th mat-header-cell *matHeaderCellDef>username</th>
-        <td mat-cell *matCellDef="let element">{{ element.username }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="c3">
-        <th mat-header-cell *matHeaderCellDef>email</th>
-        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="c4">
-        <th mat-header-cell *matHeaderCellDef>updatedAt</th>
-        <td mat-cell *matCellDef="let element">{{ element.updatedAt | date: "dd/MM/yy" }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="c5">
-        <th mat-header-cell *matHeaderCellDef>enabled</th>
-        <td mat-cell *matCellDef="let element">
-          @if(element.enabled) {Activo}
-          @else {Inactivo}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="c6">
-        <th mat-header-cell *matHeaderCellDef>Actualizar</th>
-        <td mat-cell *matCellDef="let element">
-              <button 
-              matButton
-              [routerLink]="['edits',element.userId]"
-              >
-                <mat-icon>edit</mat-icon>
-                
-              </button>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="c7">
-        <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-        <td mat-cell *matCellDef="let element">
-              <button 
-              matButton
-              (click)="eliminar(element.userId)" (click) = "openSnackBar()"
-              >
-                <mat-icon>delete</mat-icon>
-              
-              </button>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="c8">
-        <th mat-header-cell *matHeaderCellDef>Perfil</th>
-        <td mat-cell *matCellDef="let element">
-              <button 
-              matButton
-              [routerLink]="['usuario',element.userId]"
-              >
-                <mat-icon>person</mat-icon>
-                
-              </button>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-
-    </table>
-    <mat-paginator [length]="100"
-              [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]"
-              aria-label="Select page">
-      </mat-paginator>
+  <div style="text-align: center; margin: 5%;">
+    <h2>Lista de Usuarios</h2>
   </div>
+
+  <!-- CONTENEDOR DE CARDS -->
+  <div class="cards-container">
+
+    <!-- Usamos dataSource.connect() | async para que respete paginator -->
+    <mat-card class="user-card" *ngFor="let element of dataSource.connect() | async">
+
+      <mat-card-header>
+        <div mat-card-avatar>
+          <mat-icon>person</mat-icon>
+        </div>
+        <mat-card-title>{{ element.username }}</mat-card-title>
+        <mat-card-subtitle>ID: {{ element.userId }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p><strong>Email:</strong> {{ element.email }}</p>
+        <p><strong>Actualizado:</strong> {{ element.updatedAt | date: "dd/MM/yy" }}</p>
+
+        <p>
+          <strong>Estado:</strong>
+          @if (element.enabled) {
+            <span class="activo">Activo</span>
+          } @else {
+            <span class="inactivo">Inactivo</span>
+          }
+        </p>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button color="primary" [routerLink]="['edits', element.userId]">
+          <mat-icon>edit</mat-icon>
+          Editar
+        </button>
+
+        <button mat-raised-button color="warn" (click)="eliminar(element.userId); openSnackBar()">
+          <mat-icon>delete</mat-icon>
+          Eliminar
+        </button>
+
+        <button mat-raised-button color="accent" [routerLink]="['usuario', element.userId]">
+          <mat-icon>person</mat-icon>
+          Perfil
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <!-- PAGINADOR ABAJO -->
+  <mat-paginator
+    [length]="dataSource.data.length"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page">
+  </mat-paginator>
 </div>

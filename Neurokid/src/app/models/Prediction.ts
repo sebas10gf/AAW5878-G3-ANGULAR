@@ -1,9 +1,9 @@
-import { User } from "./User";
+import { Symptomslog } from "./SymptomsLog";
 
 export class Prediction {
     predictionId:number = 0;
     predictionScore: number = 0;
     explanationText: string = "";
     predictedAt: Date = new Date();
-    usuario: User = new User();
+    log:Symptomslog = new Symptomslog();
 }

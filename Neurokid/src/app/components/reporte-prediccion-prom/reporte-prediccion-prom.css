@@ -1,0 +1,62 @@
+/* CONTENEDOR GENERAL */
+.title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 15px;
+}
+
+/* TÍTULO */
+.title h2 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #eb7c7c;
+  text-align: center;
+}
+
+/* CONTENEDOR DEL GRÁFICO */
+.chart-container {
+  width: 25%;
+  max-width: 700px;
+  min-width: 280px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* SIN DATOS */
+.no-data {
+  margin-top: 40px;
+  text-align: center;
+  color: #666;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.no-data-icon {
+  font-size: 55px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.no-data-message {
+  font-size: 18px;
+  color: #777;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .chart-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .title h2 {
+    font-size: 22px;
+  }
+}

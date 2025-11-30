@@ -28,6 +28,7 @@ import { Tutorgoal } from './components/goals/tutorgoal/tutorgoal';
 import { Tutorlistar } from './components/predicciones/tutorlistar/tutorlistar';
 import { ReporteMetasCompletadas } from './components/reporte-metas-completadas/reporte-metas-completadas';
 import { ReporteDuracionMetas } from './components/reporte-duracion-metas/reporte-duracion-metas';
+import { ReportePrediccionProm } from './components/reporte-prediccion-prom/reporte-prediccion-prom';
 
 export const routes: Routes = [
      {
@@ -136,6 +137,11 @@ export const routes: Routes = [
     {
         path: 'GoalsDuration',
         component: ReporteDuracionMetas,
+        canActivate: [seguridadGuardGuard],
+    },
+    {
+        path: 'PrediccionPromedio',
+        component: ReportePrediccionProm,
         canActivate: [seguridadGuardGuard],
     },
 ];

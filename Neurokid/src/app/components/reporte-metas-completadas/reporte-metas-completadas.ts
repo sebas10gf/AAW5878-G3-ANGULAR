@@ -27,7 +27,7 @@ export class ReporteMetasCompletadas implements OnInit {
     this.uS.getRep1().subscribe((data) => {
       if (data.length > 0) {
         this.hasData = true;
-        this.barChartLabels = data.map((item) => item.userId.username);
+        this.barChartLabels = data.map((item) => item.username);
         this.barChartData=[
           {
              data:data.map(item=>item.metas_completadas),

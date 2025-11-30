@@ -41,6 +41,21 @@
       <br />
 
       <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" [(ngModel)]="email" name = "email" type="email" required #emailInput="ngModel" email/>
+        @if (emailInput.invalid && (emailInput.dirty || emailInput.touched)) {
+          @if (emailInput.errors?.['required']) {
+            <mat-error>El campo Email es obligatorio.</mat-error>
+          }
+          @if (emailInput.errors?.['email']) {
+            <mat-error>Ingrese un formato de correo válido (ej: usuario@dominio.com).</mat-error>
+          }
+        }
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field class="example-full-width">
         <mat-label>Password</mat-label>
         <input
             type="password"

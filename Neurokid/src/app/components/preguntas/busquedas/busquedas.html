@@ -1,14 +1,6 @@
 <div class="container">
   <div style="text-align: center; margin: 5%">
-    <h1>Buscar por cuestionario</h1>
-  </div>
-  <div class="search-container">
-    <form [formGroup]="form">
-      <mat-form-field class="example-full-width">
-        <mat-label>Ingrese nombre de cuestionario </mat-label>
-        <input matInput formControlName="nombrebusqueda" />
-      </mat-form-field>
-    </form>
+    <h1>{{ title }}</h1>
   </div>
   <div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -31,7 +23,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
     @if (Results) {
-  <div class="no-results">No se encontraron registros que coincidan con tu búsqueda.</div>
+  <div class="no-results">{{ mensaje }}</div>
 }
   </div>
 </div>

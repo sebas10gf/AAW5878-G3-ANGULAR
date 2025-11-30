@@ -8,10 +8,11 @@ import { Questionnariesservice } from '../../../services/questionnariesservice';
 import { CommonModule } from '@angular/common';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-cuestionarios-listar',
-  imports: [MatTableModule, MatButtonModule, MatIconModule, RouterLink, CommonModule, MatPaginatorModule],
+  imports: [MatTableModule, MatButtonModule, MatIconModule, RouterLink, CommonModule, MatPaginatorModule, MatCardModule],
   templateUrl: './cuestionarios-listar.html',
   styleUrl: './cuestionarios-listar.css',
 })
@@ -54,6 +55,6 @@ export class CuestionariosListar implements OnInit{
   }
 
   Preguntas(id:number): void {
-  this.router.navigate(['Questions','busquedas']);
+  this.router.navigate(['Questions','busquedas'], { queryParams: { questionnaireId: id} });
   }
 }

@@ -8,80 +8,75 @@ import { Questions } from '../../../models/Questions';
 import { Questionsservice } from '../../../services/questionsservice';
 import { Questionnaries } from '../../../models/Questionnaries';
 import { Questionnariesservice } from '../../../services/questionnariesservice';
+import { ActivatedRoute } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-busquedas',
   imports: [MatTableModule,
-    ReactiveFormsModule,
     CommonModule,
-    MatLabel,
-    MatFormFieldModule,
-    MatInputModule],
+    MatIconModule
+  ],
   templateUrl: './busquedas.html',
   styleUrl: './busquedas.css',
 })
 export class Busquedas implements OnInit{
   dataSource: MatTableDataSource<Questions> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3'];
-  nombrebusqueda: string = "";
   mensaje: string = "";  
-  form: FormGroup; 
-  listaCuestionarios: Questionnaries[] = [];
-  Cuestionario: any = new Questionnaries();
-  id:number=0;
   Results:boolean=false;
+  title: string = "Listado de preguntas";
 
-  constructor(private qS: Questionsservice, private fb: FormBuilder,private qsS: Questionnariesservice) {
+  constructor(private qS: Questionsservice, private qsS: Questionnariesservice, private route: ActivatedRoute) { }
 
-    this.form = this.fb.group({
-      nombrebusqueda: [''],
-    });
-
-  }
   ngOnInit(): void {
-    this.qS.list().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
+    this.route.queryParams.subscribe(params => {
+        const id = params['questionnaireId'];
+        if (id) {
+            const questionnaireId = parseInt(id, 10);
+            this.buscarPorId(questionnaireId);
+        } else {
+            this.title = "Todas las Preguntas";
+            this.qS.list().subscribe((data) => {
+                this.dataSource = new MatTableDataSource(data);
+                this.Results = data.length === 0;
+                if (this.Results) {
+                    this.mensaje = 'No hay preguntas registradas en el sistema.';
+                }
+            });
+        }
     });
-      this.form.get('nombrebusqueda')?.valueChanges.subscribe((value) => {
-      this.nombrebusqueda = value; 
-      this.buscar(); 
-    });
-
-    this.qsS.list().subscribe((data) => {
-      this.Cuestionario = data.find(c=>c.title === this.nombrebusqueda)
-        this.qsS.listId(this.Cuestionario.questionnaire_id).subscribe((data2)=>{
-          this.id = data2.questionnaire_id;
-        })
-      })
-
   }
   
-buscar() {
-
- const termino = this.nombrebusqueda.trim();
-
-  if (termino === '') {
-    // Si el campo está vacío → listar todos los registros
-    this.qS.list().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
+  buscarPorId(id: number) {
+    this.qsS.listId(id).subscribe({
+      next: (cuestionario) => {
+        this.title = `Preguntas del Cuestionario: ${cuestionario.title}`;
+      },
+      error: () => {
+        this.title = "Preguntas (Cuestionario no encontrado)";
+      }
     });
-    return;
-  }
 
-  this.qS.search(this.id).subscribe(
-  (data) => {
-    this.dataSource = new MatTableDataSource(data);
-    this.Results = data.length === 0; // si no hay resultados, mostrar mensaje
-  },
-  (err) => {
-    if (err.status === 404) {
-      this.dataSource = new MatTableDataSource(); // limpiar tabla
-      this.Results = true; // activar mensaje de “no hay resultados”
-    } else {
-      console.error('Error inesperado:', err);
-    }
+    this.qS.search(id).subscribe({
+      next: (data) => {
+        this.dataSource = new MatTableDataSource(data);
+        this.Results = data.length === 0;
+        if (this.Results) {
+            this.mensaje = `No se encontraron preguntas para el cuestionario ID: ${id}.`;
+        }
+      },
+      error: (err) => {
+        if (err.status === 404) {
+          this.dataSource = new MatTableDataSource();
+          this.Results = true;
+          this.mensaje = `No se encontraron preguntas para el cuestionario ID: ${id}.`;
+        } else {
+          console.error('Error al buscar preguntas:', err);
+          this.Results = true;
+          this.mensaje = 'Ocurrió un error al cargar las preguntas.';
+        }
+      }
+    });
   }
-);
-}
-
 }

@@ -4,6 +4,7 @@
     </div>
 
 <div class = "container" style = "text-align: center">
+  @if (!isRegister) {
     <h2>Inicie sesión</h2>
     <mat-form-field class="example-full-width">
       <mat-label>Usuario</mat-label>
@@ -25,4 +26,49 @@
     <br />
     
     <button mat-raised-button class="custom-button" (click)="login()">Ingresar</button>
+
+    <br />
+    <br />
+    <button mat-button color="primary" (click)="isRegister = true">¿No tienes cuenta? Regístrate aquí</button>
+  } @else {
+    <h2>Regístrate</h2>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Usuario</mat-label>
+        <input matInput placeholder="Usuario" [(ngModel)]="username" required/>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input
+            type="password"
+            matInput
+            placeholder="Contraseña"
+            [(ngModel)]="password"
+            required
+        />
+        </mat-form-field>
+
+        <br />
+
+        <mat-form-field class="example-full-width">
+        <mat-label>Confirmar Password</mat-label>
+        <input
+            type="password"
+            matInput
+            placeholder="Confirmar Contraseña"
+            [(ngModel)]="confirmPassword"
+            required
+        />
+        </mat-form-field>
+
+        <br />
+
+        <button mat-raised-button class="custom-button" (click)="registrar()">Registrar</button>
+        <br />
+        <br />
+        <button mat-button color="primary" (click)="isRegister = false">¿Ya tienes cuenta? Inicia sesión</button>
+  }
 </div>

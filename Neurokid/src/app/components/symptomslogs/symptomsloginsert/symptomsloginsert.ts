@@ -55,6 +55,15 @@ form: FormGroup = new FormGroup({});
   log: Symptomslog = new Symptomslog();
   edicion: boolean = false;
 
+  opciones: { value: string; viewValue: string }[] = [
+    { value:'Deprimido' , viewValue: 'Deprimido' },
+    { value: 'Triste', viewValue: 'Triste' },
+    { value: 'Feliz' , viewValue: 'Feliz' },
+    { value: 'Ansioso', viewValue: 'Ansioso' },
+    { value: 'Molesto', viewValue: 'Molesto' },
+    { value: 'No lo se', viewValue: 'No lo se' },
+  ];
+
   listaUsers: Roles[] = [];
 
   id: number = 0;

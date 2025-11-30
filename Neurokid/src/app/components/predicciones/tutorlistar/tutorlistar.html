@@ -1,6 +1,6 @@
 <div class = "container">
     <div style = "text-align:center; margin: 5%">
-        <h1>Lista de Predicciones</h1>
+        <h1>Lista de Predicciones {{usuario}}</h1>
     </div>
     <div>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -29,26 +29,6 @@
                 <td mat-cell *matCellDef="let element">{{ element.log.user.username }}</td>
             </ng-container>
 
-            <ng-container matColumnDef="c6">
-                <th mat-header-cell *matHeaderCellDef>Actualizar</th>
-                <td mat-cell *matCellDef="let element">
-                    <button matButton
-                        [routerLink]="['edits',element.predictionId]" >
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                </td>
-            </ng-container>
-
-            <ng-container matColumnDef="c7">
-                <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-                <td mat-cell *matCellDef="let element">
-                <button  matButton 
-                    (click)="eliminar(element.predictionId)" (click) = "openSnackBar()">
-                    <mat-icon>delete</mat-icon>
-            
-                </button>
-                </td>
-            </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>

@@ -3,7 +3,6 @@ import { environment } from '../../environments/environment';
 import { Subject } from 'rxjs';
 import { Questions } from '../models/Questions';
 import { HttpClient } from '@angular/common/http';
-import { Params } from '@angular/router';
 
 const base_url = environment.base
 

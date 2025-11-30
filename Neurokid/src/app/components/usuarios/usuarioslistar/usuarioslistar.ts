@@ -8,10 +8,11 @@ import { Userservice } from '../../../services/userservice';
 import { CommonModule } from '@angular/common';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-usuarioslistar',
-  imports: [MatTableModule,CommonModule,MatButtonModule, MatIconModule, RouterLink, MatPaginatorModule],
+  imports: [MatTableModule,CommonModule,MatButtonModule, MatIconModule, RouterLink, MatPaginatorModule,MatCardModule],
   templateUrl: './usuarioslistar.html',
   styleUrl: './usuarioslistar.css',
 })

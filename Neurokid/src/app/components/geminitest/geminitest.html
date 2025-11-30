@@ -1,5 +1,5 @@
 <div style="padding: 20px;">
-  <h2>Prueba de Gemini</h2>
+  <h2>Predicciones con IA</h2>
 
   <input
     type="text"
@@ -8,9 +8,39 @@
     style="width:70%; padding:8px;" />
 
   <button (click)="sendPrompt()">Enviar</button>
+  <br/>
+  <button (click)="Consulta()">Consulta</button>
+  <br/>
+    <div>
+      <form [formGroup]="form">
+                <mat-form-field class="example-full-width">
+                <mat-label>Usuario:</mat-label>
+                <mat-select formControlName="Usuario" required>
+                    @for (p of listaU; track p.roleId) {
+                    <mat-option [value]="p.user.userId">
+                    {{ p.user.username }}
+                    </mat-option>
+                }
+                </mat-select>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                <mat-label>sintoma:</mat-label>
+                <mat-select formControlName="sintoma" required>
+                    @for (p of listaSFiltrada; track p.logId) {
+                    <mat-option [value]="p.logId">
+                    {{ p.symptomNotes}}
+                    </mat-option>
+                }
+                </mat-select>
+                </mat-form-field>
+        </form>
+      </div>
 
   <div *ngIf="response" style="margin-top:20px;">
     <h3>Respuesta:</h3>
     <p>{{ response }}</p>
   </div>
+  <br/>
+  <button (click)="Aplicar()">Registrar prediccion con puntuación {{last}}</button>
+  <button (click)="actualizar()">verificar datos</button>
 </div>

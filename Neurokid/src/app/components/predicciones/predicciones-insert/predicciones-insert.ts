@@ -12,6 +12,9 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Userservice } from '../../../services/userservice';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE, MAT_DATE_FORMATS, DateAdapter, NativeDateAdapter, provideNativeDateAdapter } from '@angular/material/core';
+import { Rolesservice } from '../../../services/rolesservice';
+import { Roles } from '../../../models/Roles';
+import { loginservice } from '../../../services/loginservice';
 
 export const MY_DATE_FORMATS = {
   parse: { dateInput: 'DD/MM/YYYY' },
@@ -36,7 +39,7 @@ export class PrediccionesInsert implements OnInit {
   pre: Prediction = new Prediction();
   edicion: boolean = false;
 
-  listaUsuario: User[] = [];
+  listaUsuario: Roles[] = [];
 
   id:number = 0;
 
@@ -44,7 +47,8 @@ export class PrediccionesInsert implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private uS: Userservice
+    private rS: Rolesservice,
+    private ls: loginservice
   ) {}
 
   ngOnInit(): void {
@@ -54,9 +58,10 @@ export class PrediccionesInsert implements OnInit {
         this.init();
       });
 
-      this.uS.list().subscribe((data) => {
-        this.listaUsuario = data;
-      });
+      this.rS.list().subscribe((data) => {
+      this.listaUsuario = data.filter(u => u.role_name === "CHILD");;
+    });
+
 
       this.form = this.formBuilder.group({
         id: [''],
@@ -73,22 +78,19 @@ export class PrediccionesInsert implements OnInit {
       this.pre.predictionScore = this.form.value.puntaje;
       this.pre.explanationText = this.form.value.texto;
       this.pre.predictedAt = this.form.value.prediccion;
-      this.pre.usuario.userId = this.form.value.usuario;
+      this.pre.log.user.userId = this.form.value.usuario;
 
       if(this.edicion) {
         this.pS.update(this.pre).subscribe(() => {
           this.pS.list().subscribe((data) => {
             this.pS.setList(data);
           });
-        });
-      } else {
-        this.pS.insert(this.pre).subscribe((data) => {
-          this.pS.list().subscribe((data) => {
-            this.pS.setList(data);
-          });
-        });
+        });}
+        if(this.ls  .showRole() == "TUTOR"){
+        this.router.navigate(['Prediction/childs']);
       }
-      this.router.navigate(['Prediction']);
+      else{this.router.navigate(['Prediction']);
+}
     }
   }
 
@@ -100,7 +102,7 @@ export class PrediccionesInsert implements OnInit {
           puntaje: new FormControl(data.predictionScore),
           texto: new FormControl(data.explanationText),
           prediccion: new FormControl(data.predictedAt),
-          usuario: new FormControl(data.usuario.userId)
+          usuario: new FormControl(data.log.user.userId)
         });
       });
     }

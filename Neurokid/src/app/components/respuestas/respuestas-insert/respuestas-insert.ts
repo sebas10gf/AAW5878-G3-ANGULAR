@@ -9,11 +9,11 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { QuestionAnswers } from '../../../models/QuestionAnswers';
 import { Questions } from '../../../models/Questions';
-import { User } from '../../../models/User';
 import { Questionanswersservice } from '../../../services/questionanswersservice';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Userservice } from '../../../services/userservice';
 import { Questionsservice } from '../../../services/questionsservice';
+import { Rolesservice } from '../../../services/rolesservice';
+import { Roles } from '../../../models/Roles';
 
 export const MY_DATE_FORMATS = {
   parse: { dateInput: 'DD/MM/YYYY' },
@@ -39,7 +39,15 @@ export class RespuestasInsert implements OnInit {
   edicion: boolean = false;
 
   listaPreguntas: Questions[] = [];
-  listaUsuario: User[] = [];
+  listaUsers: Roles[] = [];
+
+  opciones: { value: number; viewValue: string }[] = [
+    { value: 1, viewValue: 'Muy en desacuerdo' },
+    { value: 2, viewValue: 'En desacuerdo' },
+    { value: 3, viewValue: 'indiferente' },
+    { value: 4, viewValue: 'De acuerdo' },
+    { value: 5, viewValue: 'Muy de acuerdo' },
+  ];
 
   id: number = 0;
   today = new Date();
@@ -48,8 +56,8 @@ export class RespuestasInsert implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private uS: Userservice,
-    private qS: Questionsservice
+    private qS: Questionsservice,
+    private rS: Rolesservice
   ) {}
 
   ngOnInit(): void {
@@ -59,9 +67,10 @@ export class RespuestasInsert implements OnInit {
         this.init();
       });
 
-      this.uS.list().subscribe((data) => {
-        this.listaUsuario = data;
-      });
+      this.rS.list().subscribe((data) => {
+      this.listaUsers = data.filter(u => u.role_name === "CHILD");;
+    });
+
 
       this.qS.list().subscribe((data) => {
         this.listaPreguntas = data;
@@ -81,8 +90,8 @@ export class RespuestasInsert implements OnInit {
       this.ans.answer_id = this.form.value.id;
       this.ans.answer_value = this.form.value.valor;
       this.ans.answered_at = this.form.value.fecha;
-      this.ans.user.username = this.form.value.usuario;
-      this.ans.question.question_text = this.form.value.pregunta;
+      this.ans.user.userId = this.form.value.usuario;
+      this.ans.questions.question_id = this.form.value.pregunta;
 
       if(this.edicion) {
         this.qaS.update(this.ans).subscribe(() => {
@@ -108,8 +117,8 @@ export class RespuestasInsert implements OnInit {
           id: new FormControl(data.answer_id),
           valor: new FormControl(data.answer_value),
           fecha: new FormControl(data.answered_at),
-          usuario: new FormControl(data.user.username),
-          pregunta: new FormControl(data.question.question_text)
+          usuario: new FormControl(data.user.userId),
+          pregunta: new FormControl(data.questions.question_id)
         });
       });
     }

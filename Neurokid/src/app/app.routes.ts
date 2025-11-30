@@ -24,6 +24,9 @@ import { Linkedprofileinsert } from './components/linkedprofile/linkedprofileins
 import { PreguntasListar } from './components/preguntas/preguntas-listar/preguntas-listar';
 import { Busquedas } from './components/preguntas/busquedas/busquedas';
 import { Geminitest } from './components/geminitest/geminitest';
+import { TUTORlistar } from './components/symptomslogs/tutorlistar/tutorlistar';
+import { Tutorgoal } from './components/goals/tutorgoal/tutorgoal';
+import { Tutorlistar } from './components/predicciones/tutorlistar/tutorlistar';
 
 export const routes: Routes = [
      {
@@ -70,6 +73,7 @@ export const routes: Routes = [
     {path:'Goal', component:Goals,
         children:[
             {path:'news',component:Goalinsert},
+            {path:'childs',component:Tutorgoal},
             {path:'edits/:id',component:Goalinsert}
         ],
         canActivate: [seguridadGuardGuard],
@@ -78,6 +82,7 @@ export const routes: Routes = [
      {path:'SymptomsLog', component:Symptomslogs,
         children:[
             {path:'news',component:Symptomsloginsert},
+            {path:'childs',component:TUTORlistar},
             {path:'edits/:id',component:Symptomsloginsert}
         ],
         canActivate: [seguridadGuardGuard],
@@ -103,6 +108,7 @@ export const routes: Routes = [
     {path:'Prediction', component:Predicciones,
         children:[
             {path:'news',component:PrediccionesInsert},
+             {path:'childs',component:Tutorlistar},
             {path:'edits/:id',component:PrediccionesInsert}
         ],
         canActivate: [seguridadGuardGuard],

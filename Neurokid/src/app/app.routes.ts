@@ -29,6 +29,7 @@ import { Tutorlistar } from './components/predicciones/tutorlistar/tutorlistar';
 import { ReporteMetasCompletadas } from './components/reporte-metas-completadas/reporte-metas-completadas';
 import { ReporteDuracionMetas } from './components/reporte-duracion-metas/reporte-duracion-metas';
 import { ReportePrediccionProm } from './components/reporte-prediccion-prom/reporte-prediccion-prom';
+import { ReporteSintomasCumplim } from './components/reporte-sintomas-cumplim/reporte-sintomas-cumplim';
 
 export const routes: Routes = [
      {
@@ -142,6 +143,11 @@ export const routes: Routes = [
     {
         path: 'PrediccionPromedio',
         component: ReportePrediccionProm,
+        canActivate: [seguridadGuardGuard],
+    },
+    {
+        path: 'CumplimientoRegistroSintomas',
+        component: ReporteSintomasCumplim,
         canActivate: [seguridadGuardGuard],
     },
 ];

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Symptomslog } from '../models/SymptomsLog';
 import { HttpClient } from '@angular/common/http';
+import { CumplimientoRegistroSintomasDTO } from '../models/CumplimientoRegistroSintomasDTO';
 
 
 const base_url = environment.base;
@@ -41,5 +42,9 @@ export class Symptomslogservice {
 
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
+  }
+
+  getRep4(): Observable<CumplimientoRegistroSintomasDTO[]> {
+      return this.http.get<CumplimientoRegistroSintomasDTO[]>(`${this.url}/CumplimientoRegistroSintomas`);
   }
 }

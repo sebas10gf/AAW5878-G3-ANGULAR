@@ -26,11 +26,17 @@ export class Autenticador implements OnInit {
 
   username: string = '';
   password: string = '';
+  email: string = '';
   mensaje: string = '';
   confirmPassword: string = '';
   isRegister: boolean = false;
 
   ngOnInit(): void { }
+
+  private isValidEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
 
   login() {
     let request = new JwtRequestDTO();
@@ -55,13 +61,19 @@ export class Autenticador implements OnInit {
       return;
     }
 
-    if (!this.username || !this.password) {
+    if (!this.username || !this.email || !this.password) {
       this.snackBar.open('Todos los campos son obligatorios', 'Cerrar', { duration: 2000 });
+      return;
+    }
+
+    if (!this.isValidEmail(this.email)) {
+      this.snackBar.open('El formato del correo no es válido', 'Cerrar', { duration : 2000 });
       return;
     }
 
     let newUser = new User();
     newUser.username = this.username;
+    newUser.email = this.email;
     newUser.passwordHash = this.password;
     newUser.createdAt = new Date();
     newUser.updatedAt = new Date();
@@ -70,6 +82,7 @@ export class Autenticador implements OnInit {
     this.uS.insert(newUser).subscribe(() => {
       this.snackBar.open('Registro exitoso. Inicie sesión', 'Cerrar', { duration: 3000 });
       this.username = '';
+      this.email = '';
       this.password = '';
       this.confirmPassword = '';
       this.isRegister = false;

@@ -1,6 +1,5 @@
-import { User } from "./User";
-
 export class CompletedGoalsDTO {
-    userId:User = new User();
+    userId:number = 0;
+    username:string = '';
     metas_completadas:number = 0;
 }

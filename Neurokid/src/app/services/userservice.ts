@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../models/User';
 import { environment } from '../../environments/environment';
 import { CompletedGoalsDTO } from '../models/CompletedGoalsDTO';
+import { ActGoalDurationDTO } from '../models/ActGoalDurationDTO';
 
 const base_url = environment.base;
 
@@ -45,5 +46,9 @@ export class Userservice {
 
   getRep1(): Observable<CompletedGoalsDTO[]> {
     return this.http.get<CompletedGoalsDTO[]>(`${this.url}/GoalsCompleted`);
+  }
+
+  getRep2(): Observable<ActGoalDurationDTO[]> {
+    return this.http.get<ActGoalDurationDTO[]>(`${this.url}/GoalsDuration`);
   }
 }

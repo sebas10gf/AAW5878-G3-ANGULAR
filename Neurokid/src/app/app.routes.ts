@@ -27,6 +27,7 @@ import { TUTORlistar } from './components/symptomslogs/tutorlistar/tutorlistar';
 import { Tutorgoal } from './components/goals/tutorgoal/tutorgoal';
 import { Tutorlistar } from './components/predicciones/tutorlistar/tutorlistar';
 import { ReporteMetasCompletadas } from './components/reporte-metas-completadas/reporte-metas-completadas';
+import { ReporteDuracionMetas } from './components/reporte-duracion-metas/reporte-duracion-metas';
 
 export const routes: Routes = [
      {
@@ -130,6 +131,11 @@ export const routes: Routes = [
     {
         path: 'GoalsCompleted',
         component: ReporteMetasCompletadas,
+        canActivate: [seguridadGuardGuard],
+    },
+    {
+        path: 'GoalsDuration',
+        component: ReporteDuracionMetas,
         canActivate: [seguridadGuardGuard],
     },
 ];

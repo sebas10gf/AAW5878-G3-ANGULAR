@@ -34,7 +34,7 @@ export class ReporteMetasCompletadas implements OnInit {
              label:'Cantidad de Metas Completadas',
              backgroundColor:[
               'green',
-              'red'
+              'green'
              ]
           }
          

@@ -25,7 +25,7 @@ export class RespuestasListar implements OnInit {
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
       this.qaS.list().subscribe((data) => {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;

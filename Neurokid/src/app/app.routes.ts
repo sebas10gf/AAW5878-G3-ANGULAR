@@ -30,6 +30,7 @@ import { ReporteMetasCompletadas } from './components/reporte-metas-completadas/
 import { ReporteDuracionMetas } from './components/reporte-duracion-metas/reporte-duracion-metas';
 import { ReportePrediccionProm } from './components/reporte-prediccion-prom/reporte-prediccion-prom';
 import { ReporteSintomasCumplim } from './components/reporte-sintomas-cumplim/reporte-sintomas-cumplim';
+import { RespuestasListar } from './components/respuestas/respuestas-listar/respuestas-listar';
 
 export const routes: Routes = [
      {
@@ -103,7 +104,7 @@ export const routes: Routes = [
     {path:'QuestionsAnswers', component:Respuestas,
         children:[
             {path:'news',component:RespuestasInsert},
-            {path:'edits/:id',component:RespuestasInsert}
+            {path:'edits/:id',component:RespuestasInsert},
         ],
         canActivate: [seguridadGuardGuard],
     },

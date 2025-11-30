@@ -1,70 +1,47 @@
 <div class="container">
- <div style="text-align: center;margin: 5%;"> <h2>Lista de Cuestionarios</h2></div>
-  <div>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <div style="text-align: center;margin: 5%;"> 
+    <h2>Lista de Cuestionarios</h2>
+  </div>
 
-      <ng-container matColumnDef="c1">
-        <th mat-header-cell *matHeaderCellDef>ID</th>
-        <td mat-cell *matCellDef="let element">{{ element.questionnaire_id }}</td>
-      </ng-container>
+  <!-- Contenedor de Cards -->
+  <div class = "cards-container">
+    <!-- Usamos dataSource.connect() | async para que respete paginator -->
+    <mat-card class="cuestionario-card" *ngFor="let element of dataSource.connect() | async">
+      <mat-card-header>
+          <div mat-card-avatar>
+            <mat-icon>question_mark</mat-icon>
+          </div>
+          <mat-card-title>{{ element.title }}</mat-card-title>
+          <mat-card-subtitle>ID: {{ element.questionnaire_id }}</mat-card-subtitle>
+      </mat-card-header>
 
-      <ng-container matColumnDef="c2">
-        <th mat-header-cell *matHeaderCellDef>titulo</th>
-        <td mat-cell *matCellDef="let element">{{ element.title }}</td>
-      </ng-container>
+      <mat-card-content>
+        <p><strong>Version:</strong> {{ element.version_number }}</p>
+      </mat-card-content>
 
-      <ng-container matColumnDef="c3">
-        <th mat-header-cell *matHeaderCellDef>version</th>
-        <td mat-cell *matCellDef="let element">{{ element.version_number }}</td>
-      </ng-container>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" [routerLink]="['edits', element.questionnaire_id]">
+          <mat-icon>edit</mat-icon>
+          Editar
+        </button>
 
-      <ng-container matColumnDef="c4">
-        <th mat-header-cell *matHeaderCellDef>Actualizar</th>
-        <td mat-cell *matCellDef="let element">
-              <button 
-              matButton
-              [routerLink]="['edits',element.questionnaire_id]"
-              >
-                <mat-icon>edit</mat-icon>
-                Actualizar
-              </button>
-        </td>
-      </ng-container>
+        <button mat-raised-button color="warn" (click)="eliminar(element.questionnaire_id); openSnackBar()">
+          <mat-icon>delete</mat-icon>
+          Eliminar
+        </button>
 
-      <ng-container matColumnDef="c5">
-        <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-        <td mat-cell *matCellDef="let element">
-              <button 
-              matButton
-              (click)="eliminar(element.questionnaire_id)" (click) = "openSnackBar()"
-              >
-                <mat-icon>delete</mat-icon>
-                Eliminar
-              </button>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="c6">
-        <th mat-header-cell *matHeaderCellDef>Preguntas</th>
-        <td mat-cell *matCellDef="let element">
-              <button 
-              matButton
-              (click)="Preguntas(element.questionnaire_id)"
-              >
-                <mat-icon>question_mark</mat-icon>
-              </button>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
+        <button mat-raised-button color="accent" (click)="Preguntas(element.questionnaire_id)">
+          <mat-icon>help_outline</mat-icon>
+          Preguntas
+        </button>
+      </mat-card-actions>
+    </mat-card>
 
     <mat-paginator [length]="100"
-              [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]"
-              aria-label="Select page">
-      </mat-paginator>
+          [pageSize]="10"
+          [pageSizeOptions]="[5, 10, 25, 100]"
+          aria-label="Select page">
+    </mat-paginator>
   </div>
 </div>
 

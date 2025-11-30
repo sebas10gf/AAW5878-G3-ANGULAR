@@ -1,5 +1,8 @@
 <div class="container">
-  <div style="text-align: center; margin: 5%"><h2>{{ edicion ? 'Editar Cuestionario' : 'Registrar Cuestionario' }}</h2></div>
+  <div style="text-align: center; margin: 5%">
+    <h2>{{ edicion ? 'Editar Cuestionario' : 'Registrar Cuestionario' }}</h2>
+  </div>
+
   <div style="text-align: center; margin: 5%">
     <form [formGroup]="form" (submit)="aceptar()">
       @if(edicion){
@@ -8,7 +11,9 @@
         <input matInput formControlName="codigo" />
       </mat-form-field>
       }
+
       <br />
+
       <mat-form-field>
         <mat-label>Titulo de cuestionario</mat-label>
         <input matInput formControlName="titulo" />
@@ -27,10 +32,13 @@
           @if (form.get('version')?.hasError('required')) { La versión es obligatoria!!!! }
         </mat-error>
       </mat-form-field>
+
       <br />
+
        <div>
         <button matButton="elevated">Registrar</button>
       </div>
+      
     </form>
   </div>
 </div>

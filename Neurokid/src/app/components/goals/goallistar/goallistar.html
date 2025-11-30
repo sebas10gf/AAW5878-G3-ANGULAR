@@ -1,20 +1,19 @@
 <div class="container">
- <div style="text-align: center;margin: 5%;"> <h2>Lista de Goals</h2></div>
+  <div style="text-align: center;margin: 5%;"> 
+    <h2>Lista de Goals</h2>
+  </div>
   <div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <!-- Position Column -->
 
       <ng-container matColumnDef="c1">
         <th mat-header-cell *matHeaderCellDef>ID</th>
         <td mat-cell *matCellDef="let element">{{ element.goalId }}</td>
       </ng-container>
-      <!-- Name Column -->
 
       <ng-container matColumnDef="c2">
         <th mat-header-cell *matHeaderCellDef>usuario</th>
         <td mat-cell *matCellDef="let element">{{element.user.username}}</td>
       </ng-container>
-      <!-- Weight Column -->
 
       <ng-container matColumnDef="c3">
         <th mat-header-cell *matHeaderCellDef>descripcion</th>
@@ -47,11 +46,10 @@
               [routerLink]="['edits',element.goalId]"
               >
                 <mat-icon>edit</mat-icon>
-                
               </button>
         </td>
       </ng-container>
-       <!-- Symbol Column -->
+
       <ng-container matColumnDef="c8">
         <th mat-header-cell *matHeaderCellDef>Eliminar</th>
         <td mat-cell *matCellDef="let element">

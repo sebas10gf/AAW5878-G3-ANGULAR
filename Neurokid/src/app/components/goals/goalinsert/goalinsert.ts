@@ -121,6 +121,7 @@ export class Goalinsert implements OnInit {
       this.router.navigate(['Goal']);}
     }
   }
+  
   init() {
     if (this.edicion) {
       this.gS.listId(this.id).subscribe((data) => {

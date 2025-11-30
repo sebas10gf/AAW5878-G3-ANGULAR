@@ -2,18 +2,19 @@
   <div style="text-align: center; margin: 3%">
     <h2>{{ edicion ? 'Editar Goal' : 'Registrar Goal' }}</h2>
   </div>
+
   <div style="text-align: center; ">
     <form [formGroup]="form" (submit)="aceptar()" class="example-form">
       @if (edicion) {
       <mat-form-field>
         <mat-label>Código</mat-label>
         <input matInput formControlName="id" required />
-
         @if (form.get('id')?.hasError('required')) {
         <mat-error>El campo id es obligatorio.</mat-error>
         }
       </mat-form-field>
       }
+
       <br />
 
       <div>
@@ -26,21 +27,22 @@
             </mat-option>
             }
           </mat-select>
-
           @if (form.get('usuario')?.hasError('required')) {
           <mat-error>El campo tipo es obligatorio.</mat-error>
           }
         </mat-form-field>
       </div>
 
+      <br />
+
       <mat-form-field>
         <mat-label>descripcion</mat-label>
         <input matInput formControlName="descripcion" required />
-
         @if (form.get('descripcion')?.hasError('required')) {
         <mat-error>El campo nombre es obligatorio.</mat-error>
         }
       </mat-form-field>
+
       <br />
 
       <mat-form-field>
@@ -52,9 +54,9 @@
         <mat-error>
           @if (form.get('inicio')?.hasError('required')) { La fecha es obligatoria!!!! }
           @if (form.get('inicio')?.hasError('fechaMayorQueHoy')) { La fecha no es valida!!!! }
-
         </mat-error>
       </mat-form-field>
+
       <br />
 
        <mat-form-field>
@@ -69,6 +71,7 @@
           @if (form.get('fin')?.hasError('fechaMayorQueHoy')) { La fecha no es valida!!!! }
         </mat-error>
       </mat-form-field>
+      
       <br />
       
       <div>

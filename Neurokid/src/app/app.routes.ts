@@ -21,12 +21,15 @@ import { seguridadGuardGuard } from './guard/seguridad-guard-guard';
 import { Home } from './components/home/home';
 import { Linkedprofile } from './components/linkedprofile/linkedprofile';
 import { Linkedprofileinsert } from './components/linkedprofile/linkedprofileinsert/linkedprofileinsert';
-import { PreguntasListar } from './components/preguntas/preguntas-listar/preguntas-listar';
 import { Busquedas } from './components/preguntas/busquedas/busquedas';
 import { Geminitest } from './components/geminitest/geminitest';
 import { TUTORlistar } from './components/symptomslogs/tutorlistar/tutorlistar';
 import { Tutorgoal } from './components/goals/tutorgoal/tutorgoal';
 import { Tutorlistar } from './components/predicciones/tutorlistar/tutorlistar';
+import { ReporteMetasCompletadas } from './components/reporte-metas-completadas/reporte-metas-completadas';
+import { ReporteDuracionMetas } from './components/reporte-duracion-metas/reporte-duracion-metas';
+import { ReportePrediccionProm } from './components/reporte-prediccion-prom/reporte-prediccion-prom';
+import { ReporteSintomasCumplim } from './components/reporte-sintomas-cumplim/reporte-sintomas-cumplim';
 
 export const routes: Routes = [
      {
@@ -125,6 +128,26 @@ export const routes: Routes = [
             {path:'news',component:Linkedprofileinsert},
             {path:'edits/:id',component:Linkedprofileinsert}
         ],
+        canActivate: [seguridadGuardGuard],
+    },
+    {
+        path: 'GoalsCompleted',
+        component: ReporteMetasCompletadas,
+        canActivate: [seguridadGuardGuard],
+    },
+    {
+        path: 'GoalsDuration',
+        component: ReporteDuracionMetas,
+        canActivate: [seguridadGuardGuard],
+    },
+    {
+        path: 'PrediccionPromedio',
+        component: ReportePrediccionProm,
+        canActivate: [seguridadGuardGuard],
+    },
+    {
+        path: 'CumplimientoRegistroSintomas',
+        component: ReporteSintomasCumplim,
         canActivate: [seguridadGuardGuard],
     },
 ];

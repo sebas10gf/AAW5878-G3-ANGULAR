@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Prediction } from '../models/Prediction';
 import { HttpClient } from '@angular/common/http';
+import { PrediccionPromedioDTO } from '../models/PrediccionPromedioDTO';
 
 const base_url = environment.base;
 
@@ -42,5 +43,9 @@ export class Predictionservice {
 
   delete(id:number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' })
+  }
+
+  getRep3(): Observable<PrediccionPromedioDTO[]> {
+    return this.http.get<PrediccionPromedioDTO[]>(`${this.url}/PrediccionPromedio`);
   }
 }

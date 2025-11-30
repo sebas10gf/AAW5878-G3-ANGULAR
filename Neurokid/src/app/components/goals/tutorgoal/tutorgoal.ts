@@ -18,13 +18,14 @@ import { forkJoin } from 'rxjs';
   templateUrl: './tutorgoal.html',
   styleUrl: './tutorgoal.css',
 })
-export class Tutorgoal implements OnInit{
-dataSource: MatTableDataSource<Goal> = new MatTableDataSource();
+export class Tutorgoal implements OnInit {
+  dataSource: MatTableDataSource<Goal> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5','c6','c7','c8'];
   usuario:string = "";
   listalinks:LinkedProfile[] = [];
   listaGoal:Goal[] =[];
   GoalFiltrados:Goal[] =[];
+
   constructor(private gS: Goalservice,private loginService: loginservice,private links:LinkedProfileservice) { }
 
   private _snackBar = inject(MatSnackBar)
@@ -32,31 +33,23 @@ dataSource: MatTableDataSource<Goal> = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-
     this.verificar();
+
+    forkJoin({
+      links: this.links.list(),
+      goals: this.gS.list()
+    }).subscribe(({ links, goals }) => {
+      this.listalinks = links;
+      this.listaGoal = goals;
+      this.filtrarDatos();
+      this.dataSource = new MatTableDataSource(this.GoalFiltrados);
+      this.dataSource.paginator = this.paginator;
+    });
     
-    
-        forkJoin({
-        links: this.links.list(),
-        goals: this.gS.list()
-      }).subscribe(({ links, goals }) => {
-    
-        this.listalinks = links;
-        this.listaGoal = goals;
-    
-        // 🔥 filtrado final
-        this.filtrarDatos();
-    
-        // cargar tabla filtrada
-        this.dataSource = new MatTableDataSource(this.GoalFiltrados);
-        this.dataSource.paginator = this.paginator;
-      });
-    
-       this.gS.getList().subscribe(nuevosDatos => {
-        this.listaGoal = nuevosDatos;
-        this.aplicarFiltroYActualizarTabla();
-      });
-    
+    this.gS.getList().subscribe(nuevosDatos => {
+      this.listaGoal = nuevosDatos;
+      this.aplicarFiltroYActualizarTabla();
+    });
   }
 
   ngAfterViewInit() { 
@@ -81,21 +74,18 @@ dataSource: MatTableDataSource<Goal> = new MatTableDataSource();
   }
 
   aplicarFiltroYActualizarTabla() {
-  this.filtrarDatos(); // <--- tu función
+  this.filtrarDatos();
   this.dataSource = new MatTableDataSource(this.GoalFiltrados);
   this.dataSource.paginator = this.paginator;
-}
+  }
 
   filtrarDatos() {
-
-  // 1. buscar todos los perfiles donde el usuario es tutor
   const misPerfiles = this.listalinks.filter(lp =>
     lp.tutor.username === this.usuario
   );
-  // 2. obtener lista de childs
+
   const childs = misPerfiles.map(lp => lp.child.username);
 
-  // 3. filtrar síntomas solo de esos childs
   this.GoalFiltrados = this.listaGoal.filter(s =>
     childs.includes(s.user.username)
   );

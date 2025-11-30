@@ -2,13 +2,16 @@
     <div>
       <img src="assets/logo.png" alt="Logo de la empresa" >
     </div>
+
 <div class = "container" style = "text-align: center">
     <h2>Inicie sesión</h2>
     <mat-form-field class="example-full-width">
       <mat-label>Usuario</mat-label>
       <input matInput placeholder="Username" [(ngModel)]="username" />
     </mat-form-field>
+
     <br />
+
     <mat-form-field class="example-full-width">
       <mat-label>Password</mat-label>
       <input
@@ -18,6 +21,8 @@
         [(ngModel)]="password"
       />
     </mat-form-field>
+
     <br />
+    
     <button mat-raised-button class="custom-button" (click)="login()">Ingresar</button>
 </div>

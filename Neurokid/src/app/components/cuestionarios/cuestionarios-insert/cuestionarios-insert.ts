@@ -49,6 +49,7 @@ export class CuestionariosInsert implements OnInit{
       version: ['', Validators.required],
     });
   }
+
   aceptar(): void {
     if (this.form.valid) {
       this.C.questionnaire_id = this.form.value.codigo;
@@ -71,6 +72,7 @@ export class CuestionariosInsert implements OnInit{
       this.router.navigate(['Questionnaries']);
     }
   }
+  
   init() {
     if (this.edicion) {
       this.cS.listId(this.id).subscribe((data) => {

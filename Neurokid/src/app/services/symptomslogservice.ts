@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { Observable, Subject } from 'rxjs';
 import { Symptomslog } from '../models/SymptomsLog';
 import { HttpClient } from '@angular/common/http';
 import { CumplimientoRegistroSintomasDTO } from '../models/CumplimientoRegistroSintomasDTO';
+import { environment } from '../../environments/environment';
 
 
 const base_url = environment.base;

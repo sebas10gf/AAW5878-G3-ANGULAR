@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { Observable, Subject } from 'rxjs';
 import { Prediction } from '../models/Prediction';
 import { HttpClient } from '@angular/common/http';
 import { PrediccionPromedioDTO } from '../models/PrediccionPromedioDTO';
+import { environment } from '../../environments/environment';
 
 const base_url = environment.base;
 

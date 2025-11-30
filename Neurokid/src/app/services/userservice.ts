@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/User';
 import { environment } from '../../environments/environment';
+import { CompletedGoalsDTO } from '../models/CompletedGoalsDTO';
 
 const base_url = environment.base;
 
@@ -40,5 +41,9 @@ export class Userservice {
 
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
+  }
+
+  getRep1(): Observable<CompletedGoalsDTO[]> {
+    return this.http.get<CompletedGoalsDTO[]>(`${this.url}/GoalsCompleted`);
   }
 }

@@ -6,6 +6,7 @@ import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/c
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { JwtModule } from '@auth0/angular-jwt';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 export function tokenGetter() {
   if(typeof window === 'undefined') {
@@ -29,6 +30,6 @@ export const appConfig: ApplicationConfig = {
           allowedDomains: ['localhost:8080']
         }
       })
-    )
+    ), provideCharts(withDefaultRegisterables())
   ]
 };

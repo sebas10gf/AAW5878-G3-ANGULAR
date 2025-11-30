@@ -5,8 +5,8 @@ import { routes } from './app.routes';
 import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { JwtModule } from '@auth0/angular-jwt';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { environment } from '../environments/environment.prod';
 
 export function tokenGetter() {
   if(typeof window === 'undefined') {
@@ -27,7 +27,7 @@ export const appConfig: ApplicationConfig = {
       JwtModule.forRoot({
         config: {
           tokenGetter: tokenGetter,
-          allowedDomains: ['localhost:8080']
+          allowedDomains: [environment.base.replace(/^https?:\/\//, '')]
         }
       })
     ), provideCharts(withDefaultRegisterables())

@@ -12,6 +12,7 @@ import { Symptomslogservice } from '../../../services/symptomslogservice';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Rolesservice } from '../../../services/rolesservice';
 import { Roles } from '../../../models/Roles';
+import { loginservice } from '../../../services/loginservice';
 
 function fechaMenorIgualHoy(control: FormControl) {
   if (!control.value) return null;
@@ -54,6 +55,15 @@ form: FormGroup = new FormGroup({});
   log: Symptomslog = new Symptomslog();
   edicion: boolean = false;
 
+  opciones: { value: string; viewValue: string }[] = [
+    { value:'Deprimido' , viewValue: 'Deprimido' },
+    { value: 'Triste', viewValue: 'Triste' },
+    { value: 'Feliz' , viewValue: 'Feliz' },
+    { value: 'Ansioso', viewValue: 'Ansioso' },
+    { value: 'Molesto', viewValue: 'Molesto' },
+    { value: 'No lo se', viewValue: 'No lo se' },
+  ];
+
   listaUsers: Roles[] = [];
 
   id: number = 0;
@@ -63,7 +73,8 @@ form: FormGroup = new FormGroup({});
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private rS: Rolesservice
+    private rS: Rolesservice,
+    private ls: loginservice
   ) {}
 
   ngOnInit(): void {
@@ -74,12 +85,12 @@ form: FormGroup = new FormGroup({});
     });
 
     this.rS.list().subscribe((data) => {
-      this.listaUsers = data.filter(u => u.role_name === "KID");;
+      this.listaUsers = data.filter(u => u.role_name === "CHILD");;
     });
 
     this.form = this.formBuilder.group({
       id: [''],
-      usuario: ['',Validators.required],
+      niño: ['',Validators.required],
       animo: ['', [Validators.required,Validators.maxLength(50)]],
       descripcion: ['', Validators.required],
       fecha: ['', [Validators.required,fechaMenorIgualHoy]],
@@ -88,7 +99,7 @@ form: FormGroup = new FormGroup({});
   aceptar(): void {
     if (this.form.valid) {
       this.log.logId = this.form.value.id;
-      this.log.user.userId = this.form.value.usuario;
+      this.log.user.userId = this.form.value.niño;
       this.log.moodEntry = this.form.value.animo;
       this.log.symptomNotes = this.form.value.descripcion;
       this.log.logDate = this.form.value.fecha;
@@ -105,7 +116,10 @@ form: FormGroup = new FormGroup({});
           });
         });
       }
-      this.router.navigate(['SymptomsLog']);
+      if(this.ls.showRole() == "TUTOR"){
+        this.router.navigate(['SymptomsLog/childs']);
+      }
+      else{this.router.navigate(['SymptomsLog']);}
     }
   }
   init() {
@@ -113,7 +127,7 @@ form: FormGroup = new FormGroup({});
       this.sS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
           id: new FormControl(data.logId),
-          usuario:new FormControl(data.user.userId),
+          niño:new FormControl(data.user.userId),
           animo: new FormControl(data.moodEntry),
           descripcion: new FormControl(data.symptomNotes),
           fecha: new FormControl(data.logDate),

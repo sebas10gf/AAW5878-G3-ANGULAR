@@ -19,9 +19,9 @@
       <div>
         <mat-form-field class="example-full-width">
           <mat-label>usuario:</mat-label>
-          <mat-select formControlName="usuario" required>
-            @for (p of listaUsers; track p.roleId) {
-            <mat-option [value]="p.roleId">
+          <mat-select formControlName="niño" required>
+            @for (p of listaUsers; track p.user.userId) {
+            <mat-option [value]="p.user.userId">
               {{ p.user.username }}
             </mat-option>
             }
@@ -33,17 +33,22 @@
         </mat-form-field>
       </div>
 
-      <mat-form-field>
-        <mat-label>estado</mat-label>
-        <input matInput formControlName="animo"  />
+      <div>
+        <mat-form-field class="example-full-width">
+          <mat-label>estado:</mat-label>
+          <mat-select formControlName="animo" required>
+            @for (p of opciones; track p.value) {
+            <mat-option [value]="p.value">
+              {{ p.viewValue }}
+            </mat-option>
+            }
+          </mat-select>
 
-        @if (form.get('animo')?.hasError('required')) {
-        <mat-error>El campo animo es obligatorio.</mat-error>
-        }
-        @if (form.get('animo')?.hasError('maxlenght')) {
-        <mat-error>El campo supera el limite</mat-error>
-        }
-      </mat-form-field>
+          @if (form.get('usuario')?.hasError('required')) {
+          <mat-error>El campo usuario es obligatorio.</mat-error>
+          }
+        </mat-form-field>
+      </div>
       <br />
 
       <mat-form-field>

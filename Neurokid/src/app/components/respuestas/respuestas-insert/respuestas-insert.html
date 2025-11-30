@@ -16,14 +16,22 @@
             }
             <br/>
 
-            <mat-form-field>
-                <mat-label>Valor</mat-label>
-                <input matInput formControlName="valor" required />
+            <div>
+                <mat-form-field class="example-full-width">
+                <mat-label>Opcion:</mat-label>
+                <mat-select formControlName="valor" required>
+                    @for (p of opciones; track p.value) {
+                    <mat-option [value]="p.value">
+                    {{ p.viewValue }}
+                    </mat-option>
+                }
+                </mat-select>
 
                 @if (form.get('valor')?.hasError('required')) {
-                    <mat-error>El campo valor es obligatorio.</mat-error>
+                <mat-error>El campo Usuario es obligatorio.</mat-error>
                 }
-            </mat-form-field>
+                </mat-form-field>
+            </div>
             <br/>
 
             <mat-form-field>
@@ -43,9 +51,9 @@
                 <mat-form-field class="example-full-width">
                 <mat-label>Usuario:</mat-label>
                 <mat-select formControlName="usuario" required>
-                    @for (p of listaUsuario; track p.userId) {
-                    <mat-option [value]="p.userId">
-                    {{ p.username }}
+                    @for (p of listaUsers; track p.roleId) {
+                    <mat-option [value]="p.user.userId">
+                    {{ p.user.username }}
                     </mat-option>
                 }
                 </mat-select>

@@ -21,7 +21,7 @@
           <mat-label>usuario:</mat-label>
           <mat-select formControlName="usuario" required>
             @for (p of listaUsers; track p.roleId) {
-            <mat-option [value]="p.roleId">
+            <mat-option [value]="p.user.userId">
               {{ p.user.username }}
             </mat-option>
             }

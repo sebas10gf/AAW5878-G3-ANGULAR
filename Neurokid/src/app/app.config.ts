@@ -6,7 +6,7 @@ import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/c
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { JwtModule } from '@auth0/angular-jwt';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
-import { environment } from '../environments/environment.prod';
+import { environment } from '../environments/environment';
 
 export function tokenGetter() {
   if(typeof window === 'undefined') {

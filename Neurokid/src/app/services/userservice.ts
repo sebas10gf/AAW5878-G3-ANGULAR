@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/User';
-import { environment } from '../../environments/environment';
 import { CompletedGoalsDTO } from '../models/CompletedGoalsDTO';
 import { ActGoalDurationDTO } from '../models/ActGoalDurationDTO';
+import { environment } from '../../environments/environment';
 
 const base_url = environment.base;
 

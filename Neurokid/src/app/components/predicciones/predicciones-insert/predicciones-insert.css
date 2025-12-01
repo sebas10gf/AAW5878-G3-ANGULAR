@@ -1,0 +1,7 @@
+/* RESPONSIVE: Mobile view */
+@media (max-width: 758px) {
+  mat-form-field,
+  button[matButton="elevated"] {
+    width: 90%; /* Aumentar el ancho en móviles */
+  }
+}

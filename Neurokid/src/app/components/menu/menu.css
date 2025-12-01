@@ -64,3 +64,18 @@
 .mat-mdc-menu-item:hover {
   background-color: rgba(46, 158, 46, 0.2) !important; /* un verde más visible al pasar el mouse */
 }
+
+/* RESPONSIVE: Mobile view */
+@media (max-width: 758px) {
+  .custom-toolbar {
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan a la siguiente línea */
+    height: auto;
+    min-height: 56px; /* Altura mínima estándar de toolbar */
+  }
+
+  .btn-rojo {
+    font-size: 0.7rem; /* Reducir ligeramente el tamaño de la fuente */
+    padding: 4px 8px;
+    margin: 2px;
+  }
+}

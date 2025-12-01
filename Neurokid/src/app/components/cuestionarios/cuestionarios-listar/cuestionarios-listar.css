@@ -8,3 +8,11 @@
 .cuestionario-card {
   padding: 10px;
 }
+
+/* RESPONSIVE: Mobile view */
+@media (max-width: 758px) {
+  .cards-container {
+    grid-template-columns: 1fr; /* Forzar una sola columna */
+    padding: 0 10px;
+  }
+}

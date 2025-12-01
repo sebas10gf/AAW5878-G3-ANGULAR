@@ -156,3 +156,61 @@ body {
     border-radius: 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
 }
+
+/* RESPONSIVE: Mobile view */
+@media (max-width: 758px) {
+  .inicio-section {
+    height: auto; 
+    padding: 20px 10px;
+  }
+
+  .inicio-container {
+    flex-direction: column; /* Apila el texto y la imagen verticalmente */
+    text-align: center;
+    gap: 30px;
+  }
+
+  .texto-contenido {
+    margin-left: 0;
+    max-width: 100%;
+  }
+  
+  .titulo-principal {
+    font-size: 2em;
+    margin-bottom: 15px;
+  }
+
+  .descripcion {
+    font-size: 1em;
+  }
+
+  .imagen-lateral {
+    order: -1; /* Mueve la imagen arriba en la sección de inicio */
+  }
+
+  .imagen-lateral img {
+    max-width: 90%;
+  }
+
+  /* Sección Soluciones Responsive */
+  .soluciones-section {
+    padding: 40px 10px;
+  }
+
+  .contenido-soluciones {
+    flex-direction: column; /* Apila el texto y la imagen de soluciones */
+    gap: 30px;
+  }
+
+  .texto-soluciones, .imagen-soluciones {
+    max-width: 100%;
+  }
+
+  .titulo-soluciones {
+    font-size: 1.8em;
+  }
+
+  .descripcion-soluciones {
+    font-size: 1em;
+  }
+}
